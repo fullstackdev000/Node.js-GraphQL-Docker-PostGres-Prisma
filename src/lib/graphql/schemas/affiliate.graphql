@@ -1,0 +1,155 @@
+type Affiliate {
+  id: Int!
+  accountConfirmed: Boolean!
+  accountExtensionType: AccountExtensionType!
+  activityStatus: ActivityStatus!
+  agents(where: AgentWhereInput, orderBy: AgentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Agent!]
+  allowClientBillingAccess: Boolean!
+  allowClientMediaUpload: Boolean!
+  allowClientOrders: Boolean!
+  areasCovered: Json
+  brokerages(where: BrokerageWhereInput, orderBy: BrokerageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Brokerage!]
+  calendarTime12h: Boolean
+  calendarFirstDay: Int
+  calendarEndTime: String
+  calendarShowBusinessHours: Boolean
+  calendarShowWeather: Boolean
+  calendarStartTime: String
+  city: String!
+  companyName: String!
+  country: Country!
+  coverPhoto: File
+  customDomain: String
+  customDomainEnabled: Boolean!
+  domainId(where: DomainWhereInput, orderBy: DomainOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Domain!]
+  facebookLink: String
+  featuredRealEstateSites(where: OrderWhereInput, orderBy: OrderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Order!]
+  instagramLink: String
+  linkedinLink: String
+  loginLink: String
+  mediaExports(where: PhotoPresetWhereInput, orderBy: PhotoPresetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PhotoPreset!]
+  defaultColorScheme: Color!
+  description: Json
+  emailOffice: String
+  orderConfirmationEmailRider: Boolean!
+  orders(where: OrderWhereInput, orderBy: OrderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Order!]
+  paymentMethods: [PaymentMethod!]!
+  phone: String!
+  phoneOffice: String
+  currentlyUsingManagingApp: Boolean
+  heardAboutUsFrom: String
+  importantThingsInManagingApp: String
+  other: String
+  toursYearly: String
+  platformName: String
+  photographers(where: PhotographerWhereInput, orderBy: PhotographerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Photographer!]
+  pinterestLink: String
+  processors(where: ProcessorWhereInput, orderBy: ProcessorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Processor!]
+  profilePicture: File
+  realEstateSiteLink: String
+  regions(where: RegionWhereInput, orderBy: RegionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Region!]
+  sendWelcomeEmailsToNewClients: Boolean!
+  servicePackageIds(where: ServicePackageWhereInput, orderBy: ServicePackageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ServicePackage!]
+  serviceIds(where: ServiceWhereInput, orderBy: ServiceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Service!]
+  signupLink: String
+  state: State!
+  street: String!
+  stripeCustomerId: String
+  supportAgent: Json
+  supportPhotographer: Json
+  supportProcessor: Json
+  templateId: Int
+  tourColor: Color!
+  twitterLink: String
+  user: User!
+  website: String
+  zip: String!
+  externalUploadLink: String
+}
+
+type SocialMediaLinks {
+  facebookLink: String
+  instagramLink: String
+  linkedinLink: String
+  pinterestLink: String
+  twitterLink: String
+}
+
+input SocialMediaLinksInput {
+  facebookLink: String
+  instagramLink: String
+  linkedinLink: String
+  pinterestLink: String
+  twitterLink: String
+}
+
+input AffiliateCreateInput {
+  city: String!
+  companyName: String!
+  country: Country!
+  coverPhoto: Upload
+  phone: String!
+  currentlyUsingManagingApp: Boolean
+  heardAboutUsFrom: String
+  importantThingsInManagingApp: String
+  other: String
+  toursYearly: String
+  platformName: String
+  profilePicture: Upload
+  socialMedia: SocialMediaLinksInput
+  state: State!
+  street: String!
+  templateId: Int
+  user: UserSignupInput!
+  website: String
+  zip: String!
+}
+
+input AffiliateUpdateInput {
+  accountConfirmed: Boolean
+  accountExtensionType: AccountExtensionType
+  activityStatus: ActivityStatus
+  allowClientBillingAccess: Boolean
+  allowClientMediaUpload: Boolean
+  allowClientOrders: Boolean
+  areasCovered: Json
+  calendarTime12h: Boolean
+  calendarFirstDay: Int
+  calendarEndTime: String
+  calendarShowBusinessHours: Boolean
+  calendarShowWeather: Boolean
+  calendarStartTime: String
+  city: String
+  companyName: String
+  country: Country
+  coverPhoto: Upload
+  customDomain: String
+  customDomainEnabled: Boolean
+  defaultColorScheme: ColorUpdateDataInput
+  description: Json
+  emailOffice: String
+  featuredRealEstateSites: [Int!]
+  loginLink: String
+  mediaExports: [PhotoPresetInput!]
+  orderConfirmationEmailRider: Boolean
+  phone: String
+  phoneOffice: String
+  platformName: String
+  profilePicture: Upload
+  realEstateSiteLink: String
+  regions: [RegionUpdateInput!]
+  sendWelcomeEmailsToNewClients: Boolean
+  signupLink: String
+  socialMedia: SocialMediaLinksInput
+  state: State
+  street: String
+  supportAgent: Json
+  supportPhotographer: Json
+  supportProcessor: Json
+  user: UserUpdateDataInput
+  templateId: Int
+  tourColor: ColorUpdateDataInput
+  website: String
+  zip: String
+  externalUploadLink: String
+}

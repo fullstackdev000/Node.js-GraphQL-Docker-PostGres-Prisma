@@ -1,0 +1,77 @@
+type RealEstate {
+  id: Int! @id
+  agentCoListingId: Agent @relation(name: "ColistingAgent")
+  agentPrimaryId: Agent! @relation(name: "PrimaryAgent")
+  amenities: [String!]! @scalarList(strategy: RELATION)
+  bedrooms: Int! @default(value: 1)
+  bedroomsAboveGrade: Int
+  bedroomsBelowGrade: Int
+  billingFrequency: BillingFrequency
+  city: String!
+  country: Country!
+  createdAt: DateTime! @createdAt
+  currency: Currency! @default(value: USD)
+  customLatitude: Float
+  customLongitude: Float
+  showOnMap: Boolean
+  mediaDocumentIds: [MediaDocument!]! @relation(name: "MediaDocumentsRelatedToRealEstate" onDelete: CASCADE)
+  mediaInteractives: [MediaInteractive!]! @relation(name: "MediaInteractivesRelatedToRealEstate" onDelete: CASCADE)
+  flyerUrl: String
+  fullBathrooms: Int! @default(value: 1)
+  garages: Int! @default(value: 0)
+  halfBathrooms: Int! @default(value: 0)
+  homeSize: Float! @default(value: 0)
+  homeSizeUnit: AreaMeasurementUnit! @default(value: SquareFeet)
+  latitude: Float
+  listingType: ListingType! @default(value: SingleFamilyHome)
+  lockBox: Boolean! @default(value: false)
+  longitude: Float
+  lotSize: Float
+  lotSizeUnit: AreaMeasurementUnit
+  name: String
+  occupied: Boolean! @default(value: false)
+  orderIds: [Order!]! @relation(name: "OrdersRelatedToRealEstate")
+  panoramas: [Panorama!]! @relation(name: "PanoramasRelatedToRealEstate", onDelete: CASCADE)
+  parkingSpaces: Int! @default(value: 0)
+  photoIds: [Photo!]! @relation(name: "PhotosRelatedToRealEstate" onDelete: CASCADE)
+  price: Float! @default(value: 0)
+  realEstateStatus: RealEstateStatus! @default(value: PENDING)
+  rental: TimePeriod
+  searchDocument: String
+  state: State!
+  street: String!
+  tourId: Tour @relation(name: "RealEstateRelatedToTour")
+  updatedAt: DateTime! @updatedAt
+  videos: [Video!]! @relation(name: "VideosRelatedToRealEstate" onDelete: CASCADE)
+  yearBuilt: Int! @default(value: 0)
+  zip: String!
+  zips: [Zip!] @relation(name: "ZipsRelatedToRealEstate")
+}
+
+type Tour {
+  id: Int! @id
+  createdAt: DateTime! @createdAt
+  descriptionFull: Json
+  descriptionShort: String
+  displayAddress: Boolean! @default(value: true)
+  domainId: Domain @relation(name: "DomainRelatedToTour", link: TABLE)
+  hideRealEstateHeadline: Boolean! @default(value: false)
+  realEstateHeadline: String
+  realEstateId: RealEstate! @relation(name: "RealEstateRelatedToTour", link: TABLE)
+}
+
+type TourBanner {
+  id: Int! @id
+  color: Color! @relation(name: "TourBannerColor")
+  label: String!
+  blackText: Boolean! @default(value: false)
+}
+
+type Zip {
+  id: Int! @id
+  archiveName: String!
+  link: String!
+  status: ZippingStatus!
+  date: DateTime @updatedAt
+  realEstateId: RealEstate! @relation(name: "ZipsRelatedToRealEstate")
+}

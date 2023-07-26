@@ -1,0 +1,9 @@
+<svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 194.7 141.2" style="enable-background:new 0 0 194.7 141.2;" xml:space="preserve">
+	<g>
+		<polygon class="st0" fill="none" points="162.7,16.7 32.9,16.7 97.4,78.7 	"/>
+		<path class="st0" fill="none" d="M97.3,101.7L16.7,24.3v96.5c0,2,1.6,3.7,3.7,3.7h154c2,0,3.7-1.6,3.7-3.7V25.1L97.3,101.7z"/>
+		<path class="st1" d="M174.3,0h-154C9.1,0,0,9.1,0,20.3v100.5c0,11.2,9.1,20.3,20.3,20.3h154c11.2,0,20.3-9.1,20.3-20.3V20.3
+			C194.7,9.1,185.6,0,174.3,0z M162.7,16.7l-65.3,62l-64.5-62H162.7z M174.3,124.5h-154c-2,0-3.7-1.6-3.7-3.7V24.3l80.6,77.5
+			L178,25.1v95.7C178,122.8,176.3,124.5,174.3,124.5z"/>
+	</g>
+</svg>

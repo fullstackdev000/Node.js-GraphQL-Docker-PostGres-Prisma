@@ -1,0 +1,65 @@
+type PhotographerConnection {
+  totalCount: Int!
+  photographers: [Photographer!]!
+}
+
+type Photographer {
+  id: Int!
+  activatable: Boolean!
+  affiliate: Affiliate!
+  affiliateId: Int!
+  changeable: Boolean!
+  city: String
+  country: Country
+  enableServiceDone: Boolean
+  events: [Event!]!
+  internalNote: String
+  phone: String
+  profilePicture: File
+  region: Region!
+  regionId: Int!
+  schedulable: Boolean!
+  state: State
+  street: String
+  user: User!
+  thumb: String
+  website: String
+  zip: String
+}
+
+input PhotographerCreateInput {
+  activatable: Boolean
+  affiliateId: Int!
+  city: String
+  changeable: Boolean
+  country: Country
+  enableServiceDone: Boolean
+  internalNote: String
+  phone: String
+  profilePicture: Upload
+  regionId: Int!
+  schedulable: Boolean
+  state: State
+  street: String
+  user: UserCreateInput!
+  website: String
+  zip: String
+}
+
+input PhotographerUpdateInput {
+  activatable: Boolean
+  city: String
+  changeable: Boolean
+  country: Country
+  enableServiceDone: Boolean
+  internalNote: String
+  phone: String
+  profilePicture: Upload
+  regionId: Int
+  schedulable: Boolean
+  state: State
+  street: String
+  user: UserUpdateInput
+  website: String
+  zip: String
+}

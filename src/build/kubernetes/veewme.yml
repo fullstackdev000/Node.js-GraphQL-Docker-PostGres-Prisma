@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: veewme-server
+  labels:
+    app: veewme
+spec:
+  type: LoadBalancer
+  selector:
+    app: veewme
+  ports:
+  - port: 80
+    targetPort: 8000
+    protocol: TCP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: veewme-server
+  labels:
+    app: veewme
+spec:
+  selector:
+    matchLabels:
+      app: veewme
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: veewme
+    spec:
+      containers:
+      - name: veewme-server
+        image: DOCKER_IMAGE
+        # imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 512Mi
+          limits:
+            cpu: 100m
+            memory: 1024Mi
+        env:
+        - name: FOO
+          value: bar
+        ports:
+        - containerPort: 8000

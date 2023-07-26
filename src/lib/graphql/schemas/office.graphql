@@ -1,0 +1,33 @@
+type OfficeConnection {
+  totalCount: Int!
+  offices: [Office!]!
+}
+
+input OfficeCreateInput {
+  brokerageId: Int!
+  city: String!
+  country: Country!
+  email: String
+  ownerId: Int
+  phone: String
+  photoDownloadPresets:  [EnabledPhotoPresetCreateInput!]!
+  regionId: Int!
+  state: State!
+  street: String!
+  website: String
+  zip: String!
+}
+
+input OfficeUpdateInput {
+  brokerageId: Int
+  city: String
+  country: Country
+  email: String
+  photoDownloadPresets: [EnabledPhotoPresetUpdateInput!]
+  phone: String
+  regionId: Int
+  state: State
+  street: String
+  website: String
+  zip: String
+}

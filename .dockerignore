@@ -1,0 +1,9 @@
+.awcache
+.cache-loader
+.git
+.vscode
+build
+dist
+node_modules*
+npm-debug.log
+tmp

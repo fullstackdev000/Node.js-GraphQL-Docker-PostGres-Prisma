@@ -1,0 +1,267 @@
+type User {
+  id: Int! @id
+  email: String! @unique
+  firstName: String!
+  joinDate: DateTime! @createdAt
+  lastActive: DateTime! @updatedAt
+  lastLogIn: DateTime
+  lastName: String!
+  password: String!
+  role: Role!
+}
+type PasswordReset {
+  id: Int! @id
+  email: String! @unique
+  resetToken: String! @unique
+  resetTokenExpiry: DateTime!
+}
+
+type Admin {
+  id: Int! @id
+  adminAddress1: String!
+  adminCity: String!
+  adminCountry: String!
+  adminEmailAddress: String!
+  adminFirstName: String!
+  adminLastName: String!
+  adminOrganizationName: String!
+  adminPhone: String!
+  adminPostalCode: String!
+  adminStateProvince: String!
+  auxBillingAddress1: String!
+  auxBillingCity: String!
+  auxBillingCountry: String!
+  auxBillingEmailAddress: String!
+  auxBillingFirstName: String!
+  auxBillingLastName: String!
+  auxBillingOrganizationName: String!
+  auxBillingPhone: String!
+  auxBillingPostalCode: String!
+  auxBillingStateProvince: String!
+  registrantAddress1: String!
+  registrantCity: String!
+  registrantCountry: String!
+  registrantEmailAddress: String!
+  registrantFirstName: String!
+  registrantLastName: String!
+  registrantOrganizationName: String!
+  registrantPhone: String!
+  registrantPostalCode: String!
+  registrantStateProvince: String!
+  techAddress1: String!
+  techCity: String!
+  techCountry: String!
+  techEmailAddress: String!
+  techFirstName: String!
+  techLastName: String!
+  techOrganizationName: String!
+  techPhone: String!
+  techPostalCode: String!
+  techStateProvince: String!
+  user: User! @relation(name: "AdminUser")
+  years: String!
+}
+
+type Affiliate {
+  id: Int! @id
+  accountConfirmed: Boolean! @default(value: false)
+  accountExtensionType: AccountExtensionType! @default(value: PRO)
+  activityStatus: ActivityStatus! @default(value: SUSPENDED)
+  agents: [Agent!]! @relation(name: "AgentsAssignedToAffiliate")
+  allowClientBillingAccess: Boolean! @default(value: true)
+  allowClientMediaUpload: Boolean! @default(value: true)
+  allowClientOrders: Boolean! @default(value: false)
+  areasCovered: Json
+#  billing: Billing! @relation(name: "AffiliateBilling" onDelete: CASCADE) flattened version ?
+  brokerages: [Brokerage!]! @relation(name:"BrokeragesCreatedByAffiliate" onDelete: CASCADE)
+  calendarTime12h: Boolean @default(value: true)
+  calendarFirstDay: Int @default(value: 0)
+  calendarEndTime: String @default(value: "18:00")
+  calendarShowBusinessHours: Boolean @default(value: false)
+  calendarShowWeather: Boolean @default(value: true)
+  calendarStartTime: String @default(value: "10:00")
+  city: String!
+  companyName: String!
+  country: Country!
+  coverPhoto: File @relation(name: "AffiliateCoverPhoto")
+  customDomain: String
+  customDomainEnabled: Boolean! @default(value: false)
+#  defaultFauxVideoMusic: File @relation(name: "FauxVideoMusic")
+  domainId: [Domain!]! @relation(name: "DomainCreatedByAffiliate", link: TABLE)
+  facebookLink: String
+  featuredRealEstateSites: [Order!]! @relation(name: "FeaturedPropertySites", onDelete: CASCADE)
+  instagramLink: String
+  linkedinLink: String
+  loginLink: String
+  mediaExports: [PhotoPreset]! @relation(name: "PhotoPresetsCreatedByAffiliate" onDelete: CASCADE)
+  defaultColorScheme: Color! @relation(name: "AffiliateDefaultColorScheme", onDelete: CASCADE)
+  description: Json
+  emailOffice: String
+  orderConfirmationEmailRider: Boolean! @default(value: false)
+  orders: [Order!]! @relation(name: "OrdersCreatedByAffiliate")
+  payments: [Payment!]! @relation(name: "AffiliatePayments")
+  phone: String!
+  phoneOffice: String
+  photographers: [Photographer!]! @relation(name: "PhotographersCreatedByAffiliate" onDelete: CASCADE)
+  pinterestLink: String
+  processors: [Processor!]! @relation(name: "ProcessorsCreatedByAffiliate" onDelete: CASCADE)
+  profilePicture: File @relation(name: "AffiliateProfilePicture")
+  realEstateSiteLink: String
+  regions: [Region!]! @relation(name: "RegionsCreatedByAffiliate" onDelete: CASCADE)
+  sendWelcomeEmailsToNewClients: Boolean! @default(value: true)
+  servicePackageIds: [ServicePackage!]! @relation(name: "ServicePackagesCreatedByAffiliate" onDelete: CASCADE)
+  serviceIds: [Service!]! @relation(name: "ServicesCreatedByAffiliate" onDelete: CASCADE)
+  serviceUIState: [ServiceUIState!]! @relation(name: "ServicesUIState" onDelete: CASCADE)
+  signupLink: String
+  state: State!
+  street: String!
+  stripeCustomerId: String
+  supportAgent: Json
+  supportPhotographer: Json
+  supportProcessor: Json
+  templateId: Int
+  tourColor: Color! @relation(name: "AffiliateTourColor", onDelete: CASCADE)
+  twitterLink: String
+  user: User! @relation(name: "AffiliateUser" onDelete: CASCADE)
+  website: String
+  zip: String!
+  currentlyUsingManagingApp: Boolean
+  heardAboutUsFrom: String
+  importantThingsInManagingApp: String
+  other: String
+  toursYearly: String
+  platformName: String
+  externalUploadLink: String
+}
+
+type Agent {
+  id: Int! @id
+  affiliate: Affiliate! @relation(name: "AgentsAssignedToAffiliate")
+  agentMLSid: String
+  bio: Json
+  brokerage: Brokerage! @relation(name: "AgentsAssignedToBrokerage")
+  city: String
+  companyPay: Boolean! @default(value: false)
+  country: Country
+  coverPhoto: File @relation(name: "AgentCoverPhoto")
+  defaultColorScheme: Color! @relation(name: "AgentDefaultColorScheme" onDelete: CASCADE)
+  designations: String
+  displayAgentCompanyLogoOnTopOfEachTour: Boolean! @default(value: false)
+  emailCC: String
+  emailCCOnorderCompleted: Boolean! @default(value: false)
+  emailCCOnorderPlaced: Boolean! @default(value: false)
+  emailOffice: String
+  facebookLink: String
+  flyerDisclaimer: String
+  flyerLayout: FlyerLayoutName! @default(value: FEATURED1)
+  hideAnimateNavigationBar: Boolean! @default(value: false)
+  hideFlyerFromRealEstateSiteTour: Boolean! @default(value: false)
+  instagramLink: String
+  internalNote: String
+  linkedinLink: String
+  newTourOrder: Boolean! @default(value: false)
+  officeAdmin: Boolean! @default(value: false)
+  showInternalNoteUponOrder: Boolean @default(value: false)
+  showSearchOnGalleryPage: Boolean! @default(value: true)
+  orders: [Order!]! @relation(name: "OrdersAssignedToAgent")
+  others: String
+  paymentsPrimary: [Payment!]! @relation(name: "AgentPrimaryPayments")
+  paymentsSecondary: [Payment!]! @relation(name: "AgentSecondaryPayments")
+  phone: String!
+  phoneAlternate: String
+  phoneMobile: String
+  pinterestLink: String
+  profilePicture: File @relation(name: "ProfilePicture")
+  profileUrl: String
+  region: Region! @relation(name: "AgentsAssignedToRegion")
+  removeExternalLinksFromUnbrandedTourFooter: Boolean! @default(value: false)
+  removePhotographerBrandingFromBrandedTour: Boolean! @default(value: false)
+  removePhotographerBrandingFromUnbrandedTour: Boolean! @default(value: false)
+  removeRealEstateAddressFromUnbrandedTours: Boolean! @default(value: false)
+  searchDocument: String
+  showPatternOverlayOnSlideShowAndVideoOverviewTour: Boolean! @default(value: false)
+  showViewAdditionalPropertiesButtonOnTours: Boolean! @default(value: false)
+  specialPricing: Boolean! @default(value: false)
+  stripeCustomerId: String
+  twitterLink: String
+  website: String
+  state: State
+  status: ActivityStatus! @default(value: ACTIVE)
+  street: String
+  title: String
+  templateId: Int
+  tourActivated: Boolean! @default(value: false)
+  user: User! @relation(name: "AgentUser" onDelete: CASCADE)
+  zip: String
+  showViewAdditionalPropertiesButtonOnTour: Boolean @default(value: true)
+  newOrderEmailNotification: Boolean @default(value: true)
+  propertySiteActivatedEmail: Boolean @default(value: true)
+  adminChargeEmailNotification: Boolean @default(value: true)
+  photographerAssignedServiceEmail: Boolean @default(value: true)
+  appointmentEmailConfirmation: Boolean @default(value: true)
+  collectPayment: CollectPayment @default(value: ORDER)
+  brokerAdmin: Boolean @default(value: false)
+  showRealEstateMapOnShowcasePage: Boolean @default(value: false)
+}
+
+type Developer {
+  id: Int! @id
+  user: User! @relation(name: "DeveloperUser" onDelete: CASCADE)
+}
+
+type Photographer {
+  id: Int! @id
+  activatable: Boolean! @default(value: true)
+  affiliateId: Affiliate! @relation(name: "PhotographersCreatedByAffiliate")
+  city: String
+  changeable: Boolean! @default(value: false)
+  country: Country
+  enableServiceDone: Boolean! @default(value: false)
+  events: [Event!]! @relation(name: "EventPhotographer")
+  internalNote: String
+  phone: String
+  profilePicture: File @relation(name: "PhotographerProfilePicture")
+  regionId: Region! @relation(name: "PhotographersAssignedToRegion")
+  schedulable: Boolean! @default(value: true)
+  searchDocument: String
+  state: State
+  street: String
+  user: User! @relation(name: "PhotographerUser" onDelete: CASCADE)
+  thumb: String
+  website: String
+  zip: String
+}
+
+type Processor {
+  id: Int! @id
+  activatable: Boolean! @default(value: false)
+  affiliateId: Affiliate! @relation(name: "ProcessorsCreatedByAffiliate")
+  city: String
+  country: Country
+  enableServiceDone: Boolean! @default(value: false)
+  internalNote: String
+  orderedServiceIds: [OrderedService!]! @relation(name: "OrderedServicesAssignedToProcessor")
+  phone: String
+  regionId: Region! @relation(name: "ProcessorsAssignedToRegion")
+  schedulable: Boolean! @default(value: false)
+  searchDocument: String
+  state: String
+  street: String
+  user: User! @relation(name: "ProcessorUser" onDelete: CASCADE)
+  website: String
+  zip: String
+}
+
+type SelfServiceAgent {
+  id: Int! @id
+  phone: String
+  user: User! @relation(name: "SelfServiceAgentUser" onDelete: CASCADE)
+  website: String
+}
+
+type Session {
+  id: Int! @id
+  sid: String! @unique
+  data: String
+  expires: DateTime
+}

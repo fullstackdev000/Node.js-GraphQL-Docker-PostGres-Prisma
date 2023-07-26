@@ -1,0 +1,13 @@
+input RegionUpdateInput {
+  delete: Boolean
+  label: String!
+  id: Int
+}
+
+type Region {
+  default: Boolean!
+  label: String!
+  id: Int!
+  owner: Affiliate!
+  ownerId: Int!
+}

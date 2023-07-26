@@ -1,0 +1,37 @@
+type Event {
+  allDay: Boolean!
+  end: DateTime
+  eventId: Int!
+  photographer: Photographer
+  privateNote: String
+  publicNote: String
+  orderedServices: [OrderedService!]!
+  start: DateTime!
+  title: String
+  vacation: Boolean
+}
+
+input EventCreateInput {
+  allDay: Boolean
+  end: DateTime
+  photographerId: Int
+  privateNote: String
+  publicNote: String
+  orderedServices: [Int!]
+  start: DateTime!
+  title: String
+  vacation: Boolean
+}
+
+input EventUpdateInput {
+  addOrderedServices: [Int!]
+  allDay: Boolean
+  end: DateTime
+  photographerId: Int
+  privateNote: String
+  publicNote: String
+  removeOrderedServices: [Int!]
+  start: DateTime
+  title: String
+  vacation: Boolean
+}

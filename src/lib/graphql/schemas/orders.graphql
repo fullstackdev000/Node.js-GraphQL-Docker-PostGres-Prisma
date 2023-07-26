@@ -1,0 +1,256 @@
+type OrderConnection {
+  orders: [Order!]!
+  totalCount: Int!
+}
+
+type OrderWithFlatennedServicesConnection {
+  orders: [OrderWithFlatennedServices]!
+  totalCount: Int!
+}
+
+input OrderCreateInput {
+  mlsPrimary: String
+  mlsSecondary: String
+  notesForPhotographer: String
+  prefferedShootDate: DateTime
+  promoCode: String
+  realEstate: RealEstateCreateWithoutOrderInput!
+  serviceIds: [Int!]!
+  servicePackageId: Int
+}
+
+input OrderUpdateInput {
+  mlsPrimary: String
+  mlsSecondary: String
+  notesForPhotographer: String
+  orderedFromAffiliateId: Int
+  prefferedShootDate: DateTime
+  promoCode: String
+  realEstate: RealEstateUpdateWithoutOrderInput
+  serviceIds: [Int]
+  servicePackageId: Int
+  templateId: Int
+  thumb: Upload
+}
+
+input OrderedServiceUpdateWithoutOrderInput {
+  id: Int
+  message: String
+  photographerId: Int
+  photographerScheduledAt: DateTime
+  processorId: Int
+  serviceId: [Int!]
+  status: OrderedServiceStatus
+}
+
+type OrderedServiceConnection {
+  orderedServices: [OrderedService]!
+  totalCount: Int!
+}
+
+enum OrderStatus {
+  Completed
+  Due
+  MediaOnly
+  Overdue
+  Paid
+  Published
+  Scheduled
+  Unassigned
+  Uncompleted
+  Unpaid
+  Unpublished
+  Unscheduled
+}
+
+type Order {
+  id: Int!
+  createdAt: DateTime!
+  date: String!
+  mlsPrimary: String
+  mlsSecondary: String
+  notesForPhotographer: String
+  orderedFromAffiliate: Affiliate!
+  orderedFromAffiliateId: Int!
+  payments: [Payment!]!
+  price: Float!
+  prefferedShootTime: DateTime
+  realEstate: RealEstate!
+  realEstateId: Int!
+  serviceIds: [Int!]!
+  servicePackageIds: [Int!]!
+  servicePackages: [ServicePackage!]!
+  services: [OrderedService!]!
+  status: OrderStatus! @deprecated(reason: "Use the `statuses` field.")
+  statuses: [OrderStatus!]!
+  statusToDisplay: OrderStatus
+  templateId: Int
+  thumb: File
+  time: String!
+  updatedAt: DateTime!
+}
+
+type OrderWithFlatennedServices {
+  id: Int!
+  createdAt: DateTime!
+  date: String!
+  mlsPrimary: String
+  mlsSecondary: String
+  notesForPhotographer: String
+  orderedFromAffiliate: Affiliate!
+  orderedFromAffiliateId: Int!
+  payments: [Payment!]!
+  price: String!
+  prefferedShootTime: DateTime
+  realEstate: RealEstate!
+  realEstateId: Int!
+  serviceIds: [Int!]!
+  services: [OrderedService!]!
+  status: OrderStatus! @deprecated(reason: "Use the `statuses` field.")
+  statuses: [OrderStatus!]!
+  statusToDisplay: OrderStatus
+  templateId: Int
+  thumb: File
+  time: String!
+  updatedAt: DateTime!
+}
+
+type OrderedService {
+  id: Int!
+  createdAt: DateTime!
+  event: Event
+  order: Order!
+  orderId: Int!
+  includedInPackage: ServicePackage
+  includedInPackageId: Int
+  message: String
+  photographerScheduledAt: DateTime
+  processor: Processor
+  processorId: Int
+  promoCode: PromoCode
+  promoCodeId: Int
+  service: Service!
+  serviceId: Int!
+  status: OrderedServiceStatus!
+  updatedAt: DateTime!
+}
+
+enum OrderMediaFilter {
+  VIDEO_ALL,
+  VIDEO_FAUX,
+  VIDEO_HOSTED,
+  INTERACTIVE_ALL,
+  INTERACTIVE_FLOOR_PLAN_PHOTOS,
+  EMBEDDED
+  PANORAMA
+}
+
+input OrderWhereInput {
+  id: Int
+  id_not: Int
+  id_in: [Int!]
+  id_not_in: [Int!]
+  id_lt: Int
+  id_lte: Int
+  id_gt: Int
+  id_gte: Int
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  media: OrderMediaFilter
+  mlsPrimary: String
+  mlsPrimary_not: String
+  mlsPrimary_in: [String!]
+  mlsPrimary_not_in: [String!]
+  mlsPrimary_lt: String
+  mlsPrimary_lte: String
+  mlsPrimary_gt: String
+  mlsPrimary_gte: String
+  mlsPrimary_contains: String
+  mlsPrimary_not_contains: String
+  mlsPrimary_starts_with: String
+  mlsPrimary_not_starts_with: String
+  mlsPrimary_ends_with: String
+  mlsPrimary_not_ends_with: String
+  mlsSecondary: String
+  mlsSecondary_not: String
+  mlsSecondary_in: [String!]
+  mlsSecondary_not_in: [String!]
+  mlsSecondary_lt: String
+  mlsSecondary_lte: String
+  mlsSecondary_gt: String
+  mlsSecondary_gte: String
+  mlsSecondary_contains: String
+  mlsSecondary_not_contains: String
+  mlsSecondary_starts_with: String
+  mlsSecondary_not_starts_with: String
+  mlsSecondary_ends_with: String
+  mlsSecondary_not_ends_with: String
+  notesForPhotographer: String
+  notesForPhotographer_not: String
+  notesForPhotographer_in: [String!]
+  notesForPhotographer_not_in: [String!]
+  notesForPhotographer_lt: String
+  notesForPhotographer_lte: String
+  notesForPhotographer_gt: String
+  notesForPhotographer_gte: String
+  notesForPhotographer_contains: String
+  notesForPhotographer_not_contains: String
+  notesForPhotographer_starts_with: String
+  notesForPhotographer_not_starts_with: String
+  notesForPhotographer_ends_with: String
+  notesForPhotographer_not_ends_with: String
+  orderedFromAffiliateId: AffiliateWhereInput
+  payments_every: PaymentWhereInput
+  payments_some: PaymentWhereInput
+  payments_none: PaymentWhereInput
+  price: Float
+  price_not: Float
+  price_in: [Float!]
+  price_not_in: [Float!]
+  price_lt: Float
+  price_lte: Float
+  price_gt: Float
+  price_gte: Float
+  prefferedShootTime: DateTime
+  prefferedShootTime_not: DateTime
+  prefferedShootTime_in: [DateTime!]
+  prefferedShootTime_not_in: [DateTime!]
+  prefferedShootTime_lt: DateTime
+  prefferedShootTime_lte: DateTime
+  prefferedShootTime_gt: DateTime
+  prefferedShootTime_gte: DateTime
+  realEstateId: RealEstateWhereInput
+  serviceIds_every: OrderedServiceWhereInput
+  serviceIds_some: OrderedServiceWhereInput
+  serviceIds_none: OrderedServiceWhereInput
+  statusCompleted: Boolean
+  statusCompleted_not: Boolean
+  statusMediaOnly: Boolean
+  statusMediaOnly_not: Boolean
+  statusOverdue: Boolean
+  statusOverdue_not: Boolean
+  statusPaid: Boolean
+  statusPaid_not: Boolean
+  statusPublished: Boolean
+  statusPublished_not: Boolean
+  statusScheduled: Boolean
+  statusScheduled_not: Boolean
+  thumb: FileWhereInput
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [OrderWhereInput!]
+  OR: [OrderWhereInput!]
+  NOT: [OrderWhereInput!]
+}

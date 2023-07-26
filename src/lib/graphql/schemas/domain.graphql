@@ -1,0 +1,54 @@
+input CheckWhiteLabelInput {
+  id: Int!
+  cname: String!
+}
+
+input AddDomainInput {
+  affiliateId: Int
+  url: String!
+}
+
+input DomainCreateCustomInput {
+  affiliateId: Int
+  existing: Boolean!
+  url: String!
+}
+
+input DomainInput {
+  url: String!
+}
+
+type ExternalDomainDetails {
+  exists: Boolean!
+  price: Float
+  status: String!
+  url: String!
+}
+
+type TopLevelDomain {
+  currency: String
+  error: Json
+  price: Float
+  status: String!
+  topLevelDomain: String!
+}
+
+type Domain {
+  id: Int!
+  affiliate: Affiliate!
+  affiliateId: Int!
+  dateOfPurchase: DateTime!
+  existing: Boolean!
+  tour: Tour
+  tourId: Int
+  url: String!
+}
+
+input DomainUpdateCustomInput {
+  addedBy: DomainProvider
+  affiliateId: Int
+  affiliate: AffiliateWhereUniqueInput
+  tourId: Int
+  tour: TourWhereUniqueInput
+  url: String
+}

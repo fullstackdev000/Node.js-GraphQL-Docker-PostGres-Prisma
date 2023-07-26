@@ -1,0 +1,89 @@
+input TourWithoutRealEstateInput {
+  descriptionFull: Json
+  descriptionShort: String
+  displayAddress: Boolean
+  hideRealEstateHeadline: Boolean
+  realEstateHeadline: String
+}
+
+input TourUpdateWithoutRealEstateInput {
+  descriptionFull: Json
+  descriptionShort: String
+  displayAddress: Boolean
+  hideRealEstateHeadline: Boolean
+  realEstateHeadline: String
+}
+
+type Tour {
+  id: Int!
+  createdAt: DateTime!
+  descriptionFull: Json
+  descriptionShort: String
+  displayAddress: Boolean!
+  hideRealEstateHeadline: Boolean!
+  interactives: [MediaInteractive!]!
+  mainColor: Color!
+  overviewPhotoIds: [Int!]!
+  overviewPhotos: [Photo!]!
+  panoramas: [Panorama!]!
+  photoIds: [Int!]!
+  photos: [Photo!]!
+  price: Float!
+  realEstateHeadline: String
+  realEstate: RealEstate!
+  realEstateId: Int!
+  videos: [Video!]!
+}
+
+input TourBannerCreateInput {
+  color: ColorCreateInput!
+  label: String!
+  blackText: Boolean
+}
+
+input TourBannerUpdateInput {
+  color: ColorUpdateDataInput!
+  label: String!
+  blackText: Boolean
+}
+
+type TourGallery {
+  bannerUrl: String
+  contact: Contact
+  tours: [Tour!]!
+}
+
+type TourGalleryConnection {
+  bannerUrl: String
+  showSearchBar: Boolean
+  contact: Contact
+  totalCount: Int!
+  tours: [Tour!]!
+}
+
+type Contact {
+  id: Int!
+  bio: Json
+  email: String!
+  city: String
+  company: String!
+  description: Json
+  facebookUrl: String
+  instagramUrl: String
+  imageUrl: String!
+  linkedinUrl: String
+  logo: String!
+  mobile: String!
+  name: String!
+  pinterestUrl: String
+  phone: String!
+  title: String!
+  twitterUrl: String
+  websiteUrl: String
+}
+
+enum TourGalleryType {
+  AFFILIATE
+  AGENT
+  BROKERAGE
+}

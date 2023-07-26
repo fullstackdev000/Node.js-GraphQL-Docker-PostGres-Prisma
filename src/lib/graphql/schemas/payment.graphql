@@ -1,0 +1,53 @@
+type Payment {
+  id: Int!
+  amount: Float!
+  type: PaymentType!
+  status: PaymentStatus!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  affiliate: Affiliate
+  agentPrimary: Agent
+  agentSecondary: Agent
+  order: Order
+  paymentLinkId: UUID
+}
+
+type CreatePaymentData {
+  clientSecret: String
+  payment: Payment
+}
+
+type PaymentMethod {
+  id: ID!
+  type: String!
+  card: CreditCard!
+}
+
+type CreditCard {
+  brand: String!
+  expMonth: Int!
+  expYear: Int!
+  last4: String!
+}
+
+type SetupIntent {
+  clientSecret: String
+}
+
+input PaymentUpdateInput {
+  status: PaymentStatus
+}
+
+input PaymentCreateInput {
+  amount: Float!
+  orderId: Int
+  paymentMethodId: ID
+  savePaymentMethod: Boolean
+  type: PaymentType!
+}
+
+input FinalizeSplitPaymentInput {
+  paymentLinkId: UUID!
+  paymentMethodId: ID
+  savePaymentMethod: Boolean
+}

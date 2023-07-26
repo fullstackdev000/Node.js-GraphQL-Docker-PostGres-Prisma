@@ -1,0 +1,15 @@
+schema: ./src/lib/graphql/schema.graphql
+documents: ./src/lib/graphql/queries.ts
+overwrite: true
+config:
+  add: "/* eslint-disable */\n/* tslint:disable */"
+generates:
+  ./build/graphqlTypes.tsx:
+    plugins:
+      - add
+      - typescript-common
+      - typescript-client
+      - typescript-server
+      - typescript-resolvers
+      - typescript-react-apollo
+

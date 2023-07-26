@@ -1,0 +1,274 @@
+version: 2.1
+
+workflows:
+  build:
+    jobs:
+      - build
+  clean-prs:
+    triggers:
+      - schedule:
+          # At minute 47 (just so it's not zero) every hour
+          cron: "47 * * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - clean-prs
+
+
+job-defaults: &job-defaults
+  docker:
+    - image: google/cloud-sdk
+
+common-steps:
+  init-env: &init-env
+    name: Initialize environment variables
+    command: |
+      set_var () {
+        echo "export $1=\"$2\"" >> $BASH_ENV
+        source $BASH_ENV
+        echo "$1=$(eval echo \$$1)"
+      }
+      declare -f set_var >> $BASH_ENV
+      set_var NODE_OPTIONS "--max_old_space_size=5120"
+      set_var DEBIAN_FRONTEND noninteractive
+      set_var CIRCLE_SHA1_SHORT "`echo $CIRCLE_SHA1 | cut -c -7`"
+      set_var GCLOUD_KEY_BASE64 "`echo $GCLOUD_KEY | base64`"
+      set_var GCLOUD_PROJECT newveewme
+      set_var GCLOUD_COMPUTEZONE us-east1-c
+      set_var GCLOUD_PR_CLUSTER_PREFIX pr-
+      set_var GITHUB_PR_NUM "${CIRCLE_PULL_REQUEST##*/}"
+      if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
+        set_var GCLOUD_CLUSTER veewme
+        set_var PRISMA_STAGE production
+        set_var POSTGRES_SCHEMA 'veewme$production'
+      elif [[ ! -z ${GITHUB_PR_NUM} ]]; then
+        set_var GCLOUD_CLUSTER "${GCLOUD_PR_CLUSTER_PREFIX}${GITHUB_PR_NUM}"
+        set_var PRISMA_STAGE "${GCLOUD_PR_CLUSTER_PREFIX}${GITHUB_PR_NUM}"
+        set_var POSTGRES_SCHEMA 'veewme\$${GCLOUD_PR_CLUSTER_PREFIX}${GITHUB_PR_NUM}'
+      else
+        exit 1
+      fi
+      set_var PRISMA_HOST 34.69.197.242 # TODO read from gcloud
+      set_var DOCKER_IMAGE_NAME "gcr.io/${GCLOUD_PROJECT}/veewme-server"
+      set_var DOCKER_IMAGE_TAG "${CIRCLE_SHA1_SHORT}"
+      set_var AWS_DEFAULT_REGION us-east-1
+      if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
+        set_var DOMAIN_NAME 2.veewme.com
+      elif [[ "${CIRCLE_BRANCH}" == "demo" ]]; then
+        set_var DOMAIN_NAME demo.veewme.com
+      fi
+      set_var USE_GKE_GCLOUD_AUTH_PLUGIN True
+  init-gcloud: &init-gcloud
+    name: Initialize gcloud
+    command: |
+      echo "${GCLOUD_KEY}" | gcloud auth activate-service-account --key-file=-
+      gcloud --quiet config set project ${GCLOUD_PROJECT}
+      gcloud --quiet config set compute/zone ${GCLOUD_COMPUTEZONE}
+      gcloud --quiet auth configure-docker
+      echo -n "Version of gke-gcloud-auth-plugin: "
+      gke-gcloud-auth-plugin --version
+  install-packages: &install-packages
+    name: Install packages
+    command: |
+      apt-get -y update
+      apt-get -y install awscli pigz jq
+
+jobs:
+  build:
+    <<: *job-defaults
+    working_directory: /dev/shm/app
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: *init-env
+      - run: *init-gcloud
+      - run: *install-packages
+      - restore_cache:
+          keys:
+            - v4-branch-{{ .Branch }}
+            - v4-packagejson-{{ checksum "Dockerfile" }}-{{ checksum "package.json" }}
+            - v4-branch-master
+            - v4
+      - run:
+          name: Restore Docker cache
+          command: |
+            docker info
+            if [[ -f /cache/docker-cache.tar.gz ]]; then
+              pigz -d --stdout /cache/docker-cache.tar.gz | docker load
+              docker images
+            else
+              echo "Cache empty"
+            fi
+      - run:
+          name: Build image
+          command: |
+            docker build --build-arg NAMECHEAP_API_KEY --build-arg NAMECHEAP_API_USER --build-arg NAMECHEAP_CLIENT_IP --build-arg NAMECHEAP_URL --build-arg NAMECHEAP_USERNAME --build-arg POSTGRES_SCHEMA --build-arg SENDGRID_KEY --build-arg SENDGRID_FROM --build-arg SENDGRID_TEMPLATE_ID --build-arg SENDGRID_TEMPLATE_SPLIT_PAYMENT_FINALIZE --build-arg GCLOUD_KEY_BASE64="${GCLOUD_KEY_BASE64}" --build-arg PRISMA_MANAGEMENT_API_SECRET=${PRISMA_MANAGEMENT_API_SECRET} --build-arg NODE_OPTIONS="${NODE_OPTIONS}" --build-arg PRISMA_STAGE=${PRISMA_STAGE} --build-arg PRISMA_HOST=${PRISMA_HOST} --rm=false -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} .
+            # if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
+            #   docker tag ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} ${DOCKER_IMAGE_NAME}:latest
+            # fi
+      - run:
+          name: Lint
+          command: |
+            if [[ ! -z ${GITHUB_PR_NUM} ]]; then
+              docker run -it ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} npm run lint
+            fi
+      - run:
+          name: Prisma - deploy
+          command: |
+            if [[ "${CIRCLE_BRANCH}" != "master" ]]; then
+              docker run -e PRISMA_MANAGEMENT_API_SECRET=${PRISMA_MANAGEMENT_API_SECRET} -e PRISMA_STAGE=${PRISMA_STAGE} -e PRISMA_HOST=${PRISMA_HOST} -it ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} npm run prisma:reset
+              docker run -e PRISMA_MANAGEMENT_API_SECRET=${PRISMA_MANAGEMENT_API_SECRET} -e PRISMA_STAGE=${PRISMA_STAGE} -e PRISMA_HOST=${PRISMA_HOST} -it ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} npm run prisma:delete
+            fi
+            docker run -e PRISMA_MANAGEMENT_API_SECRET=${PRISMA_MANAGEMENT_API_SECRET} -e PRISMA_STAGE=${PRISMA_STAGE} -e PRISMA_HOST=${PRISMA_HOST} -it ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} npm run prisma:deploy
+      - run:
+          name: Prisma - seed
+          command: |
+            if [[ "${CIRCLE_BRANCH}" != "master" ]]; then
+              docker run -e PRISMA_MANAGEMENT_API_SECRET=${PRISMA_MANAGEMENT_API_SECRET} -e PRISMA_STAGE=${PRISMA_STAGE} -e PRISMA_HOST=${PRISMA_HOST} -it ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} npm run prisma:seed
+            fi
+      - run:
+          name: Save Docker cache
+          command: |
+            mkdir -p /cache
+            INTERMEDIATE_IMAGES="$(docker history -q ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} | tr '\n' ' ' | tr -d '<missing>')"
+            docker save ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} ${INTERMEDIATE_IMAGES} | pigz > /cache/docker-cache.tar.gz
+      - save_cache:
+          key: v4-branch-{{ .Branch }}-{{ epoch }}
+          paths:
+            - /cache/
+      - save_cache:
+          key: v4-packagejson-{{ checksum "Dockerfile" }}-{{ checksum "package.json" }}
+          paths:
+            - /cache/
+      - run:
+          name: Push image
+          command: |
+            docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}
+            # if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
+            #   docker push ${DOCKER_IMAGE_NAME}:latest
+            # fi
+      - run:
+          name: Create cluster
+          command: |
+            if ! gcloud --quiet container clusters list --format="value(name)" | grep -Fqx "${GCLOUD_CLUSTER}" ; then
+              echo "Creating cluster ${GCLOUD_CLUSTER}..."
+              gcloud --quiet container clusters create ${GCLOUD_CLUSTER} --num-nodes=1
+            else
+              echo "Cluster ${GCLOUD_CLUSTER} already created"
+              gcloud --quiet container clusters get-credentials ${GCLOUD_CLUSTER}
+            fi
+      # TODO speed up deployment - clusters creating is notoriously slow
+      - run:
+          name: Deploy with kubernetes
+          command: |
+            MANIFEST=$(cat src/build/kubernetes/veewme.yml | sed "s|DOCKER_IMAGE|${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}|g")
+            echo "${MANIFEST}" | kubectl apply -f -
+            kubectl patch deployment veewme-server -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
+            kubectl rollout status deployment/veewme-server
+      # - run:
+      #     name: Deploy functions
+      #     command: |
+      #       gcloud functions deploy generateVideo --entry-point generateVideo --source=dist/functions --runtime nodejs10 --memory=2048MB --trigger-http --region=us-east1
+      - run:
+          name: Expose HTTP
+          command: |
+            if kubectl get service veewme-server ; then
+              echo "HTTP already exposed"
+            else
+              echo "Exposing HTTP..."
+              kubectl expose deployment veewme-server --type=LoadBalancer --port 80 --target-port 8000
+            fi
+      - run:
+          name: Get external IP address
+          command: |
+            set_var EXTERNAL_IP "$(kubectl get service veewme-server | tail -n1 | awk '{ print $4}')"
+      - run:
+          name: Set DNS record
+          command: |
+            if [[ -z ${DOMAIN_NAME} ]]; then
+              echo "DOMAIN_NAME not set. Skipping..."
+            fi
+            if [[ -z ${AWS_ACCESS_KEY_ID} ]]; then
+              echo "AWS_ACCESS_KEY_ID not set. Skipping..."
+            fi
+            if [[ ! -z ${DOMAIN_NAME} ]] && [[ ! -z ${AWS_ACCESS_KEY_ID} ]]; then
+              HOSTED_ZONE_NAME=veewme.com.
+              HOSTED_ZONE=$(aws route53 list-hosted-zones --output text --query "HostedZones[?Name == '${HOSTED_ZONE_NAME}'].Id")
+              echo "Got hosted zone ${HOSTED_ZONE}"
+              CHANGE=$(cat \<< END
+              {
+                "Changes": [
+                  {
+                    "Action": "UPSERT",
+                    "ResourceRecordSet": {
+                      "Name": "${DOMAIN_NAME}.",
+                      "Type": "A",
+                      "TTL": 300,
+                      "ResourceRecords": [
+                        {
+                          "Value": "${EXTERNAL_IP}"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            END
+              )
+              echo "Setting DNS record..."
+              echo "${CHANGE}"
+              aws route53 change-resource-record-sets --hosted-zone-id "${HOSTED_ZONE}" --change-batch "${CHANGE}"
+              set_var DOMAIN_NAME_SET ${DOMAIN_NAME}
+            fi
+      - run:
+          name: Send notifications
+          command: |
+            if [[ ! -z ${GITHUB_PR_NUM} ]]; then
+              if [[ ! -z ${DOMAIN_NAME_SET} ]]; then
+                URL="http://${DOMAIN_NAME_SET}"
+              else
+                URL="http://${EXTERNAL_IP}"
+              fi
+              COMMENT=":rocket: ${CIRCLE_SHA1_SHORT} built and deployed to ${URL}"
+              curl -Sf \
+                -H "Content-Type: application/json" \
+                -H "Authorization: token ${GITHUB_TOKEN}" \
+                -X POST \
+                -d "{ \"body\": \"${COMMENT}\" }" \
+                "https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/issues/${GITHUB_PR_NUM}/comments"
+            fi
+  clean-prs:
+    <<: *job-defaults
+    steps:
+      - run: *init-env
+      - run: *init-gcloud
+      - run: *install-packages
+      - run:
+          name: Get open pull requests
+          command: |
+            RESPONSE=$(curl -Sf \
+              -H "Content-Type: application/json" \
+              -H "Authorization: token ${GITHUB_TOKEN}" \
+              "https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls?state=open")
+            set_var GITHUB_OPEN_PRS "$(echo ${RESPONSE} | jq '[ .[] | .number ] | .[]')"
+      - run:
+          name: Get clusters
+          command: |
+            set_var GCLOUD_CLUSTERS "$(gcloud container clusters list | tail -n +2 | awk '{ print $1 }')"
+      - run:
+          name: Delete clusters for closed pull requests
+          command: |
+            while read -r cluster; do
+              if [[ $cluster =~ ^${GCLOUD_PR_CLUSTER_PREFIX}([0-9]+)$ ]]; then
+                cluster_pr_num="${BASH_REMATCH[1]}"
+                if grep -Fxq "${cluster_pr_num}" \<<< ${GITHUB_OPEN_PRS} ; then
+                  echo "Pull request ${cluster_pr_num} still open."
+                else
+                  echo "Deleting ${cluster}.."
+                  gcloud --quiet container clusters delete ${cluster}
+                fi
+              fi
+            done \<<< ${GCLOUD_CLUSTERS}

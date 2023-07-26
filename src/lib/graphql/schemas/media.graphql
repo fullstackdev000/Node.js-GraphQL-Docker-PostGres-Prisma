@@ -1,0 +1,219 @@
+input PhotoPresetInput {
+  id: Int
+  height: Int!
+  name: String!
+  resolution: Int!
+  width: Int!
+}
+
+input EnabledPhotoPresetCreateInput {
+  enabled: Boolean!
+  photoPresetId: Int!
+  downloadTrigger: PhotoDownloadTriggers
+}
+
+input EnabledPhotoPresetUpdateInput {
+  id: Int
+  enabled: Boolean
+  photoPresetId: Int
+  downloadTrigger: PhotoDownloadTriggers
+}
+
+type Photo {
+  id: Int!
+  createdAt: DateTime!
+  date: String!
+  featured: Boolean!
+  file: File
+  fileId: Int
+  fileName: String!
+  fullUrl: String!
+  hidden: Boolean!
+  realEstate: RealEstate!
+  realEstateId: Int!
+  star: Boolean!
+  thumb: File
+  thumbId: Int
+  thumbUrl: String!
+  title: String
+  webFileId: Int
+  webFile: File
+  webUrl: String!
+  updatedAt: DateTime!
+}
+
+input PhotosCustomWhereInput {
+  id: Int
+  id_not: Int
+  id_in: [Int!]
+  id_not_in: [Int!]
+  id_lt: Int
+  id_lte: Int
+  id_gt: Int
+  id_gte: Int
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  featured: Boolean
+  featured_not: Boolean
+  file: FileWhereInput
+  fileId: Int
+  hidden: Boolean
+  hidden_not: Boolean
+  realEstate: RealEstateWhereInput
+  realEstateId: Int
+  star: Boolean
+  star_not: Boolean
+  thumb: FileWhereInput
+  thumbId: Int
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  webFileId: Int
+  webFile: FileWhereInput
+  AND: [PhotosCustomWhereInput!]
+  OR: [PhotosCustomWhereInput!]
+  NOT: [PhotosCustomWhereInput!]
+}
+
+input PhotoCustomCreateInput {
+  featured: Boolean
+  file: Upload!
+  hidden: Boolean
+  photoIdentification: String!
+  realEstateId: Int!
+  title: String
+}
+
+input PhotoCustomUpdateInput {
+  featured: Boolean
+  hidden: Boolean
+  title: String
+}
+
+input PhotoProgressWhereInput {
+  realEstateId: Int!
+}
+
+type PhotoProgress {
+  complete: Boolean!
+  photoIdentification: String!
+  progress: Int!
+  realEstateId: Int!
+}
+
+type MediaDocument {
+  id: Int!
+  appearance: Appearance!
+  createdAt: DateTime!
+  downloadUrl: String!
+  extension: String!
+  file: File!
+  fileId: Int!
+  label: String!
+  realEstate: RealEstate!
+  realEstateId: Int!
+  size: Int!
+  updatedAt: DateTime!
+}
+
+input MediaDocumentCustomCreateInput {
+  file: Upload!
+  photoIdentification: String!
+  appearance: Appearance
+  label: String
+  realEstateId: Int!
+}
+
+
+input MediaDocumentCustomUpdateInput {
+  appearance: Appearance
+  label: String
+}
+
+input FileCustomZipInput {
+  filename: String!
+  path: String!
+}
+
+input ZipFileCreateInput {
+  files: [FileCustomZipInput!]!
+  archiveName: String!
+  realEstateId: Int!
+}
+
+input MediaInteractiveCreateInput {
+  appearance: Appearance
+  embeddedCode: String
+  files: [MediaInteractiveCreateFileInput!]
+  label: String
+  realEstateId: Int!
+  type: MediaInteractiveType!
+  url: String
+  theaterMode: Boolean
+}
+
+input MediaInteractiveCreateFileInput {
+  file: Upload!
+  label: String
+}
+
+input MediaInteractiveUpdateFileInput {
+  id: Int
+  file: Upload
+  label: String
+}
+
+input MediaInteractiveUpdateInput {
+  appearance: Appearance
+  embeddedCode: String
+  files: [MediaInteractiveUpdateFileInput!]
+  label: String
+  type: MediaInteractiveType
+  url: String
+  theaterMode: Boolean
+}
+
+type MediaInteractive {
+  id: Int!
+  appearance: Appearance!
+  embeddedCode: String
+  createdAt: DateTime!
+  files: [MediaInteractiveFile!]
+  label: String
+  realEstate: RealEstate
+  type: MediaInteractiveType!
+  updatedAt: DateTime!
+  url: String
+  theaterMode: Boolean
+}
+
+type MediaInteractiveFile {
+  id: Int!
+  file: File!
+  label: String
+}

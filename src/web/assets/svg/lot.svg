@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 45 45" version="1.1" style="background: #FFFFFF;" class="injected-svg inject">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="18" height="18"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard">
+            <g id="icon-lot-size" transform="translate(8.000000, 8.000000)">
+                <g id="Page-1">
+                    <g id="icon-lot-size">
+                        <path class="svg-icon" d="M0,0 L30,0 L30,30 L0,30 L0,0 Z M2,2 L2,28 L28,28 L28,2 L2,2 Z" id="Combined-Shape" fill="#9FC44D" fill-rule="nonzero"></path>
+                        <g id="Rectangle-3" transform="translate(0.000000, 12.000000)">
+                            <g id="path-1-Clipped">
+                                <mask id="mask-2" fill="white">
+                                    <use xlink:href="#path-1"></use>
+                                </mask>
+                                <g id="path-1"></g>
+                                <rect class="svg-icon-stroke" id="path-1" stroke-width="6" mask="url(#mask-2)" x="0" y="0" width="18" height="18"></rect>
+                            </g>
+                        </g>
+                        <path class="svg-icon" d="M26.2141292,12 L18,12 L18,2 L28,2 L28,4.0909091 L22.6933187,9.39759037 L27.0306681,9.39759037 L24.4282585,12 L26.2141292,12 Z M20.9545455,2 L25.5454545,2 L20.4545455,7.09090909 L20.4545455,3 L18,5.45454545 L18,2 L20.9545455,2 Z" id="Combined-Shape" fill="#9FC44D"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,37 @@
+type Order {
+  id: Int! @id
+  createdAt: DateTime! @createdAt
+  mlsPrimary: String
+  mlsSecondary: String
+  notesForPhotographer: String
+  orderedFromAffiliateId: Affiliate! @relation(name: "OrdersCreatedByAffiliate")
+  payments: [Payment!]! @relation(name: "OrderPayments")
+  price: Float!
+  prefferedShootTime: DateTime
+  realEstateId: RealEstate! @relation(name: "OrdersRelatedToRealEstate", link: TABLE)
+  serviceIds: [OrderedService!]! @relation(name: "OrderedServices")
+  statusCompleted: Boolean! @default(value: false)
+  statusMediaOnly: Boolean! @default(value: false)
+  statusOverdue: Boolean! @default(value: false)
+  statusPaid: Boolean! @default(value: false)
+  statusPublished: Boolean! @default(value: false)
+  statusScheduled: Boolean! @default(value: false)
+  templateId: Int
+  thumb: File @relation(name: "OrderThumbnail")
+  updatedAt: DateTime! @updatedAt
+}
+
+type OrderedService {
+  id: Int! @id
+  createdAt: DateTime! @createdAt
+  event: Event @relation(name: "OrderedServiceEvent")
+  orderId: Order! @relation(name: "OrderedServices")
+  includedInPackageId: ServicePackage @relation(name: "ServiceOrderedAsPartOfTheServicePackage")
+  message: String
+  photographerScheduledAt: DateTime
+  processorId: Processor @relation(name: "OrderedServicesAssignedToProcessor")
+  promoCodeId: PromoCode @relation(name: "PromoCodeAppliedToOrderedService")
+  serviceId: Service! @relation(name: "OrdersPlacedForTheService")
+  status: OrderedServiceStatus! @default(value: Pending)
+  updatedAt: DateTime! @updatedAt
+}

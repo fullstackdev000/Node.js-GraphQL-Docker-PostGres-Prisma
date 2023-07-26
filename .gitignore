@@ -1,0 +1,16 @@
+.awcache
+.cache-loader
+.gcloudignore
+.vscode
+.env.*local
+/build
+dist
+node_modules*
+npm-debug.log
+tmp
+code_ideas
+.DS_Store
+report.*.json
+.env
+.env.development
+.env.production

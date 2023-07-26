@@ -1,0 +1,37 @@
+union AccountUnion = Admin | Affiliate | Agent | Developer | Photographer | Processor | SelfServiceAgent
+
+type Account {
+  accountId: Int!
+  firstName: String!
+  lastName: String!
+  role: Role!
+  account: AccountUnion!
+}
+
+input UserCreateInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String
+}
+
+input UserSignupInput {
+  id: Int
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+}
+
+input SignUpInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  role: Role!
+}
+
+input LogInInput {
+  email: String!
+  password: String!
+}

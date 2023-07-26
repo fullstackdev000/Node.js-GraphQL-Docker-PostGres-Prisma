@@ -1,0 +1,11 @@
+type DemoThing {
+  id: Int! @id
+  foo: String
+  bar: Int!
+}
+
+type DemoImages {
+  id: Int! @id
+  images: [File!]! @relation(name: "DownsizedImages")
+  cropImages: [File!]! @relation(name: "CroppedImages")
+}

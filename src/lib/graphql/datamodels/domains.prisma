@@ -1,0 +1,8 @@
+type Domain {
+  id: Int! @id
+  addedBy: DomainProvider!
+  affiliateId: Affiliate! @relation(name: "DomainCreatedByAffiliate")
+  dateOfPurchase: DateTime! @createdAt
+  tourId: Tour @unique @relation(name: "DomainRelatedToTour")
+  url: String! @unique
+}

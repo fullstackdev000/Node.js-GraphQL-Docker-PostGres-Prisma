@@ -1,0 +1,16 @@
+input WhereIdUniqueInput {
+  id: Int!
+}
+
+scalar Upload
+
+input ToggleActivityStatusInput {
+  status: ActivityStatus!
+}
+
+input ColorInput {
+  r: Int!
+  g: Int!
+  b: Int!
+  a: Float!
+}

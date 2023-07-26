@@ -1,0 +1,154 @@
+input RealEstateCreateWithoutOrderInput {
+  agentCoListingId: Int
+  agentPrimaryId: Int!
+  amenities: [String!]
+  bedrooms: Int
+  bedroomsAboveGrade: Int
+  bedroomsBelowGrade: Int
+  billingFrequency: BillingFrequency
+  city: String!
+  country: Country!
+  currency: Currency
+  customLatitude: Float
+  customLongitude: Float
+  showOnMap: Boolean
+  fullBathrooms: Int
+  garages: Int
+  halfBathrooms: Int
+  homeSize: Float
+  homeSizeUnit: AreaMeasurementUnit
+  latitude: Float
+  listingType: ListingType
+  lockBox: Boolean
+  longitude: Float
+  lotSize: Float
+  lotSizeUnit: AreaMeasurementUnit
+  name: String
+  occupied: Boolean
+  parkingSpaces: Int
+  price: Float
+  realEstateStatus: RealEstateStatus
+  rental: TimePeriod
+  state: State!
+  street: String!
+  tour: TourWithoutRealEstateInput
+  yearBuilt: Int
+  zip: String!
+}
+
+input RealEstateUpdateWithoutOrderInput {
+  agentCoListingId: Int
+  agentPrimaryId: Int
+  amenities: [String!]
+  bedrooms: Int
+  bedroomsAboveGrade: Int
+  bedroomsBelowGrade: Int
+  BillingFrequency: BillingFrequency
+  city: String!
+  country: Country!
+  currency: Currency
+  customLatitude: Float
+  customLongitude: Float
+  showOnMap: Boolean
+  fullBathrooms: Int
+  garages: Int
+  halfBathrooms: Int
+  homeSize: Int
+  homeSizeUnit: AreaMeasurementUnit
+  latitude: Float
+  listingType: ListingType
+  lockBox: Boolean
+  longitude: Float
+  lotSize: Float
+  lotSizeUnit: AreaMeasurementUnit
+  name: String
+  occupied: Boolean
+  parkingSpaces: Int
+  price: Float
+  realEstateStatus: RealEstateStatus
+  rental: TimePeriod
+  state: State!
+  street: String!
+  tour: TourUpdateWithoutRealEstateInput
+  yearBuilt: Int
+  zip: String!
+}
+
+type RealEstate {
+  id: Int!
+  address: String!
+  agentCoListing: Agent
+  agentCoListingId: Int
+  agentPrimary: Agent!
+  agentPrimaryId: Int!
+  amenities: [String!]!
+  bedrooms: Int!
+  bedroomsAboveGrade: Int
+  bedroomsBelowGrade: Int
+  billingFrequency: BillingFrequency
+  city: String!
+  country: Country!
+  createdAt: DateTime!
+  currency: Currency!
+  customLatitude: Float
+  customLongitude: Float
+  showOnMap: Boolean
+  mediaDocumentIds: [Int!]!
+  mediaDocuments: [MediaDocument!]!
+  mediaInteractiveIds: [Int!]!
+  mediaInteractives: [MediaInteractive!]!
+  flyerUrl: String
+  fullBathrooms: Int!
+  garages: Int!
+  halfBathrooms: Int!
+  homeSize: Int!
+  homeSizeUnit: AreaMeasurementUnit!
+  latitude: Float
+  listingType: ListingType!
+  lockBox: Boolean!
+  longitude: Float
+  lotSize: Float
+  lotSizeUnit: AreaMeasurementUnit
+  name: String
+  occupied: Boolean!
+  orderIds: [Int!]
+  orders: [Order!]
+  panoramas: [Panorama!]!
+  parkingSpaces: Int!
+  photoIds(orderBy: PhotoOrderByInput): [Int!]!
+  photos(orderBy: PhotoOrderByInput): [Photo!]!
+  price: Float!
+  realEstateStatus: RealEstateStatus!
+  rental: TimePeriod
+  state: State!
+  street: String!
+  tour: Tour
+  tourId: Int
+  updatedAt: DateTime!
+  videos: [Video!]!
+  yearBuilt: Int!
+  zip: String!
+  zips:[Zip!]
+}
+
+type GeoCoordinates {
+  latitude: Float!
+  longitude: Float!
+}
+
+type Zip {
+  id: Int!
+  archiveName: String!
+  link: String!
+  status: ZippingStatus!
+  date: DateTime
+  realEstateId: Int!
+}
+
+input OnePageRealEstateFlyerPdfInput {
+  realEstateId: Int!
+  bigImgId: Int!
+  coverImgId: Int!
+  firstSideImgId: Int!
+  secondSideImgId: Int!
+}

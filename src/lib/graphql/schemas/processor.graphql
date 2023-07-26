@@ -1,0 +1,58 @@
+type ProcessorConnection {
+  totalCount: Int!
+  processors: [Processor!]!
+}
+
+input ProcessorCreateInput {
+  activatable: Boolean
+  affiliateId: Int
+  city: String
+  country: Country
+  enableServiceDone: Boolean
+  internalNote: String
+  phone: String
+  regionId: Int
+  schedulable: Boolean
+  state: String
+  street: String
+  user: UserCreateInput!
+  website: String
+  zip: String
+}
+
+input ProcessorUpdateInput {
+  activatable: Boolean
+  affiliateId: Int
+  city: String
+  country: Country
+  enableServiceDone: Boolean
+  internalNote: String
+  phone: String
+  regionId: Int
+  schedulable: Boolean
+  state: String
+  street: String
+  user: UserUpdateInput
+  website: String
+  zip: String
+}
+
+type Processor {
+  id: Int!
+  activatable: Boolean!
+  affiliate: Affiliate!
+  affiliateId: Int!
+  city: String
+  country: Country
+  enableServiceDone: Boolean!
+  internalNote: String
+  phone: String
+  region: Region!
+  regionId: Int!
+  schedulable: Boolean!
+  street: String
+  state: String
+  user: User!
+  website: String
+  zip: String
+}

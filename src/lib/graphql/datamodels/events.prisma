@@ -1,0 +1,14 @@
+type Event {
+  allDay: Boolean! @default(value: false)
+  eventId: Int! @id
+  createdAt: DateTime! @createdAt
+  end: DateTime
+  photographer: Photographer @relation(name: "EventPhotographer")
+  privateNote: String
+  publicNote: String
+  orderedServices: [OrderedService!]! @relation(name: "OrderedServiceEvent")
+  start: DateTime!
+  title: String
+  updatedAt: DateTime! @updatedAt
+  vacation: Boolean! @default(value: false)
+}

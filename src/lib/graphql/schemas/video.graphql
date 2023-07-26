@@ -1,0 +1,120 @@
+type Video {
+  id: Int!
+  appearance: Appearance!
+  audio: String
+  category: VideoCategory!
+  createdAt: DateTime!
+  date: String!
+  embeddedCode: String
+  file: File
+  fileName: String
+  generateOption: GenerateOption
+  includeCaptions: Boolean
+  photos: [Photo!]!
+  realEstate: RealEstate!
+  overview: Boolean!
+  realEstateOrder: Int!
+  slideDuration: Int!
+  slideTransition: SlideTransition
+  status: VideoStatus!
+  label: String
+  theaterMode: Boolean!
+  thumbId: Int
+  thumbUrl: String
+  posterFullUrl: String
+  type: VideoType!
+  updatedAt: DateTime!
+  url: String
+}
+
+# Hosted video inputs
+
+input VideoHostedCreateInput {
+  appearance: Appearance
+  category: VideoCategory
+  file: Upload!
+  overview: Boolean
+  photoIdentification: String!
+  realEstateId: Int!
+  label: String
+  theaterMode: Boolean
+  thumbId: Int
+}
+
+input VideoHostedUpdateInput {
+  appearance: Appearance
+  category: VideoCategory
+  overview: Boolean
+  label: String
+  theaterMode: Boolean
+  thumbId: Int
+}
+
+# External URL video inputs
+
+input VideoUrlCreateInput {
+  appearance: Appearance
+  category: VideoCategory
+  realEstateId: Int!
+  label: String
+  theaterMode: Boolean
+  url: String!
+}
+
+input VideoUrlUpdateInput {
+  appearance: Appearance
+  category: VideoCategory
+  label: String
+  theaterMode: Boolean
+  url: String
+}
+
+# Embedded code video inputs
+
+input VideoEmbedCreateInput {
+  appearance: Appearance
+  category: VideoCategory
+  embeddedCode: String!
+  realEstateId: Int!
+  label: String
+  theaterMode: Boolean
+}
+
+input VideoEmbedUpdateInput {
+  appearance: Appearance
+  category: VideoCategory
+  embeddedCode: String
+  label: String
+  theaterMode: Boolean
+}
+
+# Faux video inputs
+
+input VideoFauxCreateInput {
+  appearance: Appearance
+  audio: String
+  category: VideoCategory
+  includeCaptions: Boolean
+  generateOption: GenerateOption!
+  label: String
+  photos: [Int!]!
+  realEstateId: Int!
+  slideDuration: Int!
+  slideTransition: SlideTransition!
+  theaterMode: Boolean
+  thumbId: Int
+}
+
+input VideoFauxUpdateInput {
+  appearance: Appearance
+  audio: String
+  category: VideoCategory
+  includeCaptions: Boolean
+  generateOption: GenerateOption
+  label: String
+  photos: [Int!]
+  slideDuration: Int
+  slideTransition: SlideTransition
+  theaterMode: Boolean
+  thumbId: Int
+}

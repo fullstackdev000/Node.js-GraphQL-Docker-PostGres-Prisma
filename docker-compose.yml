@@ -1,0 +1,51 @@
+version: '3.7'
+
+services:
+  dev:
+    build:
+      context: .
+      target: base
+    tty: true
+    environment:
+      DEV_MODE_HOST: 0.0.0.0
+      PRISMA_HOST: prisma
+      PRISMA_MANAGEMENT_API_SECRET: prisma-api-secret
+      PRISMA_STAGE: dev
+    ports:
+      - '8000:8000'
+      - '8001:8001'
+      - '8080:8080' # google functions framework
+      - '9229:9229' # node debugger
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+  prisma:
+    image: prismagraphql/prisma:1.33
+    ports:
+      - '4466:4466'
+    environment:
+      PRISMA_CONFIG: |
+        managementApiSecret: prisma-api-secret
+        port: 4466
+        databases:
+          default:
+            connector: postgres
+            host: postgres
+            port: 5432
+            user: postgres
+            password: postgres
+            migrations: true
+            managementSchema: management
+
+volumes:
+  node_modules:
+  postgres:

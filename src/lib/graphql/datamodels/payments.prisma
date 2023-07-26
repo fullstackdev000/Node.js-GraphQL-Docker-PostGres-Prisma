@@ -1,0 +1,27 @@
+enum PaymentType {
+  COMPANY_PAY
+  ON_DELIVERY
+  ON_ORDER
+  SPLIT_PAYMENT
+  GENERIC
+}
+
+enum PaymentStatus {
+  PAID
+  UNPAID
+}
+
+type Payment {
+  id: Int! @id
+  amount: Float!
+  clientSecret: String
+  status: PaymentStatus! @default(value: UNPAID)
+  paymentLinkId: UUID
+  type: PaymentType!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  affiliate: Affiliate @relation(name: "AffiliatePayments")
+  agentPrimary: Agent @relation(name: "AgentPrimaryPayments")
+  agentSecondary: Agent @relation(name: "AgentSecondaryPayments")
+  order: Order @relation(name: "OrderPayments")
+}

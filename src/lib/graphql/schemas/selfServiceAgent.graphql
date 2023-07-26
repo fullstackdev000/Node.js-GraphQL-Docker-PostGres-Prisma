@@ -1,0 +1,12 @@
+input SelfServiceCustomCreateInput {
+  phone: String!
+  user: UserSignupInput!
+  website: String
+}
+
+type SelfServiceAgent {
+  id: Int!
+  phone: String
+  user: User!
+  website: String
+}

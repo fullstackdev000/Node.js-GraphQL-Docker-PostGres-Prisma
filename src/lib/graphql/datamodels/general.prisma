@@ -1,0 +1,14 @@
+type Color {
+  id: Int! @id
+  a: Float! @default(value: 1)
+  b: Int!
+  g: Int!
+  r: Int!
+}
+
+type Region {
+  default: Boolean! @default(value: false)
+  label: String!
+  id: Int! @id
+  ownerId: Affiliate! @relation(name: "RegionsCreatedByAffiliate")
+}

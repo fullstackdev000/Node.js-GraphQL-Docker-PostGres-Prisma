@@ -1,0 +1,1062 @@
+{
+  "timeline": [
+    {
+      "duration": 100,
+      "transitionNext": {
+        "duration": 1500,
+        "easing": [
+          0.25,
+          0.1,
+          0.25,
+          1
+        ]
+      },
+      "slide2d": {
+        "draws": [
+          [
+            [
+              "drawImage",
+              "1.jpg",
+              0,
+              0,
+              1920,
+              1280,
+              0,
+              -100,
+              1920,
+              1280
+            ]
+          ]
+        ],
+        "background": "#eee",
+        "size": [
+          1920,
+          1080
+        ]
+      }
+    },
+    {
+      "duration": 1900,
+      "transitionNext": {
+        "duration": 500
+      },
+      "slide2d": {
+        "draws": [
+          [
+            "drawImage",
+            "1.jpg",
+            0,
+            0,
+            1920,
+            1280,
+            0,
+            -100,
+            1920,
+            1280
+          ],
+          {
+            "fillStyle": "rgba(0, 0, 0, 0.4)"
+          },
+          [
+            "fillRect",
+            0,
+            -100,
+            1920,
+            1280
+          ],
+          {
+            "fillStyle": "rgba(158, 204, 61, 0.9)"
+          },
+          [
+            "fillRect",
+            0,
+            350,
+            1920,
+            330
+          ],
+          {
+            "fillStyle": "rgb(255, 255, 255)"
+          },
+          [
+            "fillRect",
+            160,
+            125,
+            420,
+            420
+          ],
+          [
+            "drawImage",
+            "agent.jpeg",
+            0,
+            0,
+            320,
+            320,
+            170,
+            135,
+            400,
+            400
+          ],
+          {
+            "fillStyle": "rgb(255, 255, 255)"
+          },
+          [
+            "fillRect",
+            160,
+            560,
+            420,
+            260
+          ],
+          [
+            "drawImage",
+            "company.png",
+            0,
+            0,
+            265,
+            134,
+            133,
+            570,
+            474,
+            240
+          ],
+          {
+            "font": "300 32px Open Sans, sans-serif",
+            "textAlign": "left",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "Presented by",
+            630,
+            410
+          ],
+          {
+            "font": "300 85px Open Sans, sans-serif",
+            "textAlign": "left",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "Marilyn Monroe",
+            637,
+            515
+          ],
+          {
+            "font": "300 42px Open Sans, sans-serif",
+            "textAlign": "left",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "Bogart Realty",
+            630,
+            590
+          ],
+          {
+            "font": "300 42px Open Sans, sans-serif",
+            "textAlign": "left",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "",
+            630,
+            645
+          ]
+        ],
+        "background": "#eee",
+        "size": [
+          1920,
+          1080
+        ]
+      }
+    },
+    {
+      "duration": 200,
+      "transitionNext": {
+        "duration": 500
+      },
+      "slide2d": {
+        "draws": [
+          [
+            "drawImage",
+            "2.jpg",
+            0,
+            0,
+            1920,
+            1280,
+            0,
+            -100,
+            1920,
+            1280
+          ],
+          {
+            "fillStyle": "rgba(158, 204, 61, 0.9)"
+          },
+          [
+            "fillRect",
+            0,
+            -100,
+            1920,
+            1280
+          ]
+        ],
+        "background": "#eee",
+        "size": [
+          1920,
+          1080
+        ]
+      }
+    },
+    {
+      "duration": 2300,
+      "transitionNext": {
+        "duration": 500
+      },
+      "slide2d": {
+        "draws": [
+          [
+            "drawImage",
+            "2.jpg",
+            0,
+            0,
+            1920,
+            1280,
+            0,
+            -100,
+            1920,
+            1280
+          ],
+          {
+            "fillStyle": "rgba(158, 204, 61, 0.9)"
+          },
+          [
+            "fillRect",
+            0,
+            -100,
+            1920,
+            1280
+          ],
+          {
+            "font": "600 90px Open Sans, sans-serif",
+            "textAlign": "center",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "cnngcfn",
+            960,
+            500
+          ],
+          {
+            "font": "italic 300 60px/2 Open Sans, sans-serif",
+            "textAlign": "center",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "cfhtdthdthfc, AK ttdxhdhcf",
+            960,
+            590
+          ]
+        ],
+        "background": "#eee",
+        "size": [
+          1920,
+          1080
+        ]
+      }
+    },
+    {
+      "duration": 3500,
+      "transitionNext": {
+        "duration": 500
+      },
+      "image": "1.jpg",
+      "kenburns": {
+        "to": [
+          0.9,
+          [
+            0.45,
+            0.55
+          ]
+        ],
+        "from": [
+          1,
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      }
+    },
+    {
+      "duration": 3500,
+      "transitionNext": {
+        "duration": 500
+      },
+      "image": "2.jpg",
+      "kenburns": {
+        "to": [
+          1,
+          [
+            0.45,
+            0.55
+          ]
+        ],
+        "from": [
+          0.9,
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      }
+    },
+    {
+      "duration": 3500,
+      "transitionNext": {
+        "duration": 500
+      },
+      "image": "3.jpg",
+      "kenburns": {
+        "to": [
+          0.9,
+          [
+            0.45,
+            0.55
+          ]
+        ],
+        "from": [
+          1,
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      }
+    },
+    {
+      "duration": 3500,
+      "transitionNext": {
+        "duration": 500
+      },
+      "image": "4.jpg",
+      "kenburns": {
+        "to": [
+          0.9,
+          [
+            0.45,
+            0.45
+          ]
+        ],
+        "from": [
+          1,
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      }
+    },
+    {
+      "duration": 3500,
+      "transitionNext": {
+        "duration": 500
+      },
+      "image": "5.jpg",
+      "kenburns": {
+        "to": [
+          0.9,
+          [
+            0.55,
+            0.45
+          ]
+        ],
+        "from": [
+          1,
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      }
+    },
+    {
+      "duration": 3500,
+      "transitionNext": {
+        "duration": 500
+      },
+      "image": "6.jpg",
+      "kenburns": {
+        "to": [
+          0.9,
+          [
+            0.45,
+            0.45
+          ]
+        ],
+        "from": [
+          1,
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      }
+    },
+    {
+      "duration": 3500,
+      "transitionNext": {
+        "duration": 500
+      },
+      "image": "7.jpg",
+      "kenburns": {
+        "to": [
+          1,
+          [
+            0.55,
+            0.55
+          ]
+        ],
+        "from": [
+          0.9,
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      }
+    },
+    {
+      "duration": 3500,
+      "transitionNext": {
+        "duration": 500
+      },
+      "image": "8.jpg",
+      "kenburns": {
+        "to": [
+          1,
+          [
+            0.45,
+            0.45
+          ]
+        ],
+        "from": [
+          0.9,
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      }
+    },
+    {
+      "duration": 3500,
+      "transitionNext": {
+        "duration": 500
+      },
+      "image": "9.jpg",
+      "kenburns": {
+        "to": [
+          1,
+          [
+            0.55,
+            0.55
+          ]
+        ],
+        "from": [
+          0.9,
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      }
+    },
+    {
+      "duration": 3500,
+      "transitionNext": {
+        "duration": 500
+      },
+      "image": "10.jpg",
+      "kenburns": {
+        "to": [
+          0.9,
+          [
+            0.55,
+            0.55
+          ]
+        ],
+        "from": [
+          1,
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      }
+    },
+    {
+      "duration": 3500,
+      "transitionNext": {
+        "duration": 500
+      },
+      "image": "11.jpg",
+      "kenburns": {
+        "to": [
+          0.9,
+          [
+            0.45,
+            0.45
+          ]
+        ],
+        "from": [
+          1,
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      }
+    },
+    {
+      "duration": 3500,
+      "transitionNext": {
+        "duration": 500
+      },
+      "image": "12.jpg",
+      "kenburns": {
+        "to": [
+          0.9,
+          [
+            0.55,
+            0.55
+          ]
+        ],
+        "from": [
+          1,
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      }
+    },
+    {
+      "duration": 3500,
+      "transitionNext": {
+        "duration": 500
+      },
+      "image": "13.jpg",
+      "kenburns": {
+        "to": [
+          1,
+          [
+            0.55,
+            0.45
+          ]
+        ],
+        "from": [
+          0.9,
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      }
+    },
+    {
+      "duration": 3500,
+      "transitionNext": {
+        "duration": 500
+      },
+      "image": "14.jpg",
+      "kenburns": {
+        "to": [
+          0.9,
+          [
+            0.45,
+            0.45
+          ]
+        ],
+        "from": [
+          1,
+          [
+            0.5,
+            0.5
+          ]
+        ]
+      }
+    },
+    {
+      "duration": 2500,
+      "transitionNext": {
+        "duration": 500
+      },
+      "slide2d": {
+        "draws": [
+          {
+            "fillStyle": "rgb(158, 204, 61)"
+          },
+          [
+            "fillRect",
+            0,
+            -100,
+            1920,
+            1280
+          ],
+          {
+            "font": "300 130px Open Sans, sans-serif",
+            "textAlign": "center",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "Thank you for viewing",
+            960,
+            460
+          ],
+          {
+            "font": "300 130px Open Sans, sans-serif",
+            "textAlign": "center",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "this presentation...",
+            960,
+            640
+          ],
+          {
+            "fillStyle": "rgb(255, 255, 255)"
+          },
+          [
+            "fillRect",
+            384,
+            800,
+            1152,
+            4
+          ]
+        ],
+        "background": "#eee",
+        "size": [
+          1920,
+          1080
+        ]
+      }
+    },
+    {
+      "duration": 100,
+      "transitionNext": {
+        "duration": 500
+      },
+      "slide2d": {
+        "draws": [
+          {
+            "fillStyle": "rgba(30, 30, 30, 1)"
+          },
+          [
+            "fillRect",
+            0,
+            -100,
+            1920,
+            1280
+          ]
+        ],
+        "background": "#eee",
+        "size": [
+          1920,
+          1080
+        ]
+      }
+    },
+    {
+      "duration": 2000,
+      "transitionNext": {
+        "duration": 500,
+        "easing": [
+          0,
+          0,
+          1,
+          1
+        ]
+      },
+      "slide2d": {
+        "draws": [
+          {
+            "fillStyle": "rgba(30, 30, 30, 1)"
+          },
+          [
+            "fillRect",
+            0,
+            -100,
+            1920,
+            1280
+          ],
+          {
+            "font": "300 50px Open Sans, sans-serif",
+            "textAlign": "center",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "Media by:",
+            960,
+            250
+          ],
+          {
+            "font": "600 100px Open Sans, sans-serif",
+            "textAlign": "center",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "Classic Photography",
+            960,
+            540
+          ],
+          {
+            "font": "300 50px Open Sans, sans-serif",
+            "textAlign": "center",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "veewme.com/",
+            960,
+            680
+          ]
+        ],
+        "background": "#eee",
+        "size": [
+          1920,
+          1080
+        ]
+      }
+    },
+    {
+      "duration": 100,
+      "transitionNext": {
+        "duration": 500
+      },
+      "slide2d": {
+        "draws": [
+          [
+            "drawImage",
+            "1.jpg",
+            0,
+            0,
+            1920,
+            1280,
+            0,
+            -100,
+            1920,
+            1280
+          ],
+          {
+            "fillStyle": "rgba(158, 204, 61, 0.9)"
+          },
+          [
+            "fillRect",
+            0,
+            -100,
+            1920,
+            1280
+          ]
+        ],
+        "background": "#eee",
+        "size": [
+          1920,
+          1080
+        ]
+      }
+    },
+    {
+      "duration": 3800,
+      "slide2d": {
+        "draws": [
+          [
+            "drawImage",
+            "1.jpg",
+            0,
+            0,
+            1920,
+            1280,
+            0,
+            -100,
+            1920,
+            1280
+          ],
+          {
+            "fillStyle": "rgba(158, 204, 61, 0.9)"
+          },
+          [
+            "fillRect",
+            0,
+            -100,
+            1920,
+            1280
+          ],
+          {
+            "font": "400 67px Open Sans, sans-serif",
+            "textAlign": "left",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "Marilyn Monroe",
+            650,
+            115
+          ],
+          {
+            "font": "400 67px Open Sans, sans-serif",
+            "textAlign": "left",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "",
+            650,
+            185
+          ],
+          {
+            "font": "300 40px Open Sans, sans-serif",
+            "textAlign": "left",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "Bogart Realty",
+            650,
+            175
+          ],
+          {
+            "font": "300 40px Open Sans, sans-serif",
+            "textAlign": "left",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "",
+            650,
+            225
+          ],
+          {
+            "font": "300 25px Open Sans, sans-serif",
+            "textAlign": "left",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "mobile",
+            650,
+            240
+          ],
+          {
+            "font": "300 40px Open Sans, sans-serif",
+            "textAlign": "left",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "+1 234567890",
+            650,
+            285
+          ],
+          {
+            "font": "300 25px Open Sans, sans-serif",
+            "textAlign": "left",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "office",
+            650,
+            333
+          ],
+          {
+            "font": "300 40px Open Sans, sans-serif",
+            "textAlign": "left",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "+1 734-485-0818",
+            650,
+            375
+          ],
+          {
+            "font": "300 33px Open Sans, sans-serif",
+            "textAlign": "left",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "tapionen@icloud.com",
+            650,
+            455
+          ],
+          {
+            "font": "300 33px Open Sans, sans-serif",
+            "textAlign": "left",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "http://Marilynmonroe.com",
+            650,
+            500
+          ],
+          {
+            "font": "300 33px Open Sans, sans-serif",
+            "textAlign": "right",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "Falcon Ave",
+            1730,
+            1000
+          ],
+          {
+            "font": "300 33px Open Sans, sans-serif",
+            "textAlign": "right",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "Hollywood, CA 90210",
+            1730,
+            1050
+          ],
+          {
+            "font": "300 33px Open Sans, sans-serif",
+            "textAlign": "left",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "Oscar Winner",
+            160,
+            1000
+          ],
+          {
+            "font": "300 33px Open Sans, sans-serif",
+            "textAlign": "left",
+            "fillStyle": "#FFFFFF"
+          },
+          [
+            "fillText",
+            "Oscar Winner",
+            160,
+            1050
+          ],
+          {
+            "fillStyle": "rgb(255, 255, 255)"
+          },
+          [
+            "fillRect",
+            160,
+            50,
+            420,
+            420
+          ],
+          [
+            "drawImage",
+            "agent.jpeg",
+            0,
+            0,
+            320,
+            320,
+            170,
+            60,
+            400,
+            400
+          ],
+          {
+            "fillStyle": "rgb(255, 255, 255)"
+          },
+          [
+            "fillRect",
+            160,
+            485,
+            420,
+            260
+          ],
+          [
+            "drawImage",
+            "company.png",
+            0,
+            0,
+            265,
+            134,
+            133,
+            495,
+            474,
+            240
+          ]
+        ],
+        "background": "#eee",
+        "size": [
+          1920,
+          1080
+        ]
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "glsl": "#ifdef GL_ES\nprecision highp float;\n#endif\nuniform sampler2D from, to;\nuniform float progress;\nuniform vec2 resolution;\n\nuniform ivec2 squares;\nuniform vec2 direction;\nuniform float smoothness;\n\nconst vec2 center = vec2(0.5, 0.5);\n\nvoid main() {\n  vec2 p = gl_FragCoord.xy / resolution.xy;\nvec2 v = normalize(direction);\n  if (v != vec2(0.0))\n    v /= abs(v.x)+abs(v.y);\n  float d = v.x * center.x +v.y * center.y;\n  float offset = smoothness;\n  float pr = smoothstep(-offset, 0.0, v.x * p.x + v.y * p.y - (d-0.5+progress*(1.+offset)));\n  vec2 squarep = fract(p*vec2(squares));\n  vec2 squaremin = vec2(pr/2.0);\n  vec2 squaremax = vec2(1.0 - pr/2.0);\n  float a = all(lessThan(squaremin, squarep)) && all(lessThan(squarep, squaremax)) ? 1.0 : 0.0;\n  gl_FragColor = mix(texture2D(from, p), texture2D(to, p), a);\n}",
+      "uniforms": {
+        "direction": [
+          1,
+          -0.5
+        ],
+        "squares": [
+          10,
+          10
+        ],
+        "smoothness": 1.6
+      },
+      "name": "squareswipe",
+      "stars": 0,
+      "owner": "gre",
+      "created_at": "2014-05-23T12:09:38Z",
+      "id": "b6720916aa3f035949bc",
+      "updated_at": "2015-08-29T14:01:44Z",
+      "html_url": "https://gist.github.com/b6720916aa3f035949bc"
+    },
+    {
+      "updated_at": "2015-04-20T02:58:26Z",
+      "glsl": "\n#ifdef GL_ES\nprecision highp float;\n#endif\nuniform sampler2D from;uniform sampler2D to;uniform float progress;uniform vec2 resolution;uniform float smoothness;uniform bool opening;const vec2 center=vec2(0.5,0.5);const float SQRT_2=1.414213562373;void main(){vec2 p=gl_FragCoord.xy/resolution.xy;float x=opening?progress:1.-progress;float m=smoothstep(-smoothness,0.0,SQRT_2*distance(center,p)-x*(1.+smoothness));gl_FragColor=mix(texture2D(from,p),texture2D(to,p),opening?1.-m:m);}",
+      "uniforms": {
+        "smoothness": 0.3,
+        "opening": true
+      },
+      "name": "circleopen",
+      "stars": 0,
+      "owner": "gre",
+      "created_at": "2014-05-16T13:40:51Z",
+      "id": "35e8c18557995c77278e",
+      "html_url": "https://gist.github.com/35e8c18557995c77278e"
+    },
+    {
+      "glsl": "#ifdef GL_ES\nprecision highp float;\n#endif\n \n// General parameters\nuniform sampler2D from;\nuniform sampler2D to;\nuniform float progress;\nuniform vec2 resolution;\n \n// Custom parameters\nuniform float size;\n \nfloat rand (vec2 co) {\n  return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);\n}\n \nvoid main() {\n  vec2 p = gl_FragCoord.xy/ resolution.xy;\n  float r = rand(vec2(0, p.y));\n  float m = smoothstep(0.0, -size, p.x*(1.0-size) + size*r - (progress * (1.0 + size)));\n  gl_FragColor = mix(texture2D(from, p), texture2D(to, p), m);\n}",
+      "uniforms": {
+        "size": 0.2
+      },
+      "name": "wind",
+      "stars": 0,
+      "owner": "gre",
+      "created_at": "2014-05-16T13:49:36Z",
+      "id": "7de3f4b9482d2b0bf7bb",
+      "updated_at": "2015-08-29T14:01:30Z",
+      "html_url": "https://gist.github.com/7de3f4b9482d2b0bf7bb"
+    }
+  ],
+  "playbackRate": 1,
+  "generator": {
+    "url": "https://github.com/gre/diaporama-maker",
+    "version": "0.6.0"
+  }
+}

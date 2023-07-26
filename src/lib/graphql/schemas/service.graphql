@@ -1,0 +1,262 @@
+input ServiceFeeAdjustedByRegionCreateInput {
+  adjustedCompensation: Float
+  adjustedPrice: Float!
+  regionId: Int!
+}
+
+input ServiceFeeAdjustedByRegionUpdateInput {
+  id: Int
+  adjustedCompensation: Float!
+  adjustedPrice: Float!
+  regionId: Int!
+}
+
+type ServiceFeeAdjustedByRegion {
+  id: Int!
+  adjustedCompensation: Float!
+  adjustedPrice: Float!
+  regionId: Int!
+  region: Region!
+}
+
+enum ServiceTypeMerged {
+  AddOn
+  Admin
+  Package
+  Primary
+  Upgrade
+}
+
+input ServiceCreateInput {
+  assignable: Boolean!
+  categoryId: Int
+  defaultCompensation: Float!
+  longDescription: Json
+  duration: Int!
+  durationUnit: DurationUnit!
+  link: String
+  mediaOnly: Boolean!
+  name: String!
+  note: String
+  ownerId: Int
+  orderNotifyEmails: [String!]
+  price: Float!
+  processorId: Int
+  regionFeesAdjusted: [ServiceFeeAdjustedByRegionCreateInput!]
+  serviceIds: [Int!]!
+  serviceImage: Upload
+  serviceType: ServiceTypeMerged!
+  shortDescription: String!
+  title: String
+  tourNotifyEmails: [String!]
+}
+
+input ServiceUpdateInput {
+  assignable: Boolean
+  categoryId: Int
+  defaultCompensation: Float
+  longDescription: Json
+  duration: Int
+  durationUnit: DurationUnit
+  link: String
+  mediaOnly: Boolean
+  name: String
+  note: String
+  ownerId: Int
+  orderNotifyEmails: [String!]
+  price: Float
+  processorId: Int
+  regionFeesAdjusted: [ServiceFeeAdjustedByRegionUpdateInput!]
+  serviceIds: [Int!]
+  serviceImage: Upload
+  serviceType: ServiceTypeMerged
+  suspended: Boolean
+  shortDescription: Json
+  title: String
+  tourNotifyEmails: [String!]
+}
+
+input ServiceBasicCreateInput {
+  assignable: Boolean!
+  categoryId: Int
+  defaultCompensation: Float!
+  longDescription: Json
+  duration: Int!
+  durationUnit: DurationUnit!
+  link: String
+  mediaOnly: Boolean!
+  name: String!
+  note: String
+  ownerId: Int
+  orderNotifyEmails: [String!]
+  price: Float!
+  processorId: Int
+  regionFeesAdjusted: [ServiceFeeAdjustedByRegionCreateInput!]
+  serviceImage: Upload
+  serviceType: ServiceType!
+  shortDescription: String!
+  title: String
+  tourNotifyEmails: [String!]
+}
+
+input ServiceBasicUpdateInput {
+  assignable: Boolean
+  categoryId: Int
+  defaultCompensation: Float
+  longDescription: Json
+  duration: Int
+  durationUnit: DurationUnit
+  link: String
+  mediaOnly: Boolean
+  name: String
+  note: String
+  ownerId: Int
+  orderNotifyEmails: [String!]
+  price: Float
+  processorId: Int
+  regionFeesAdjusted: [ServiceFeeAdjustedByRegionUpdateInput!]
+  serviceImage: Upload
+  serviceType: ServiceType
+  shortDescription: String
+  suspended: Boolean
+  title: String
+  tourNotifyEmails: [String!]
+}
+
+type Service {
+  id: Int!
+  archivised: Boolean!
+  assignable: Boolean!
+  categoryId: Int
+  categoryLabel: String!
+  category: ServiceCategory
+  defaultCompensation: Float!
+  longDescription: Json
+  duration: Int!
+  durationUnit: DurationUnit!
+  events: [Event!]!
+  link: String
+  mediaOnly: Boolean!
+  name: String!
+  note: String
+  ownerId: Int!
+  owner: Affiliate!
+  orderNotifyEmails: [String!]!
+  packageIds: [Int!]!
+  packages: [ServicePackage!]!
+  price: Float!
+  processorId: Int
+  processor: Processor
+  regionFeesAdjusted: [ServiceFeeAdjustedByRegion!]!
+  regionFeeAdjustedIds: [Int!]!
+  serviceImageId: Int
+  serviceImage: File
+  serviceType: ServiceType!
+  shortDescription: String!
+  suspended: Boolean!
+  title: String
+  tourNotifyEmails: [String!]!
+}
+
+type ServiceConnection {
+  totalCount: Int!
+  services: [Service!]!
+}
+
+input ServicePackageFeeAdjustedByRegionCreateInput {
+  adjustedPrice: Float!
+  regionId: Int!
+}
+
+input ServicePackageFeeAdjustedByRegionUpdateInput {
+  id: Int
+  adjustedPrice: Float!
+  regionId: Int!
+}
+
+input ServicePackageCreateInput {
+  assignable: Boolean!
+  duration: Int!
+  durationUnit: DurationUnit!
+  mediaOnly: Boolean!
+  name: String!
+  note: String
+  orderNotifyEmails: [String!]
+  ownerId: Int
+  price: Float!
+  processorId: Int
+  regionFeesAdjusted: [ServicePackageFeeAdjustedByRegionCreateInput!]
+  serviceIds: [Int!]!
+  suspended: Boolean
+  title: String
+  tourNotifyEmails: [String!]
+}
+
+input ServicePackageUpdateInput {
+  assignable: Boolean
+  duration: Int
+  durationUnit: DurationUnit
+  mediaOnly: Boolean
+  name: String
+  note: String
+  orderNotifyEmails: [String!]
+  ownerId: Int
+  price: Float
+  processorId: Int
+  regionFeesAdjusted: [ServicePackageFeeAdjustedByRegionUpdateInput!]
+  serviceIds: [Int!]
+  suspended: Boolean
+  title: String
+  tourNotifyEmails: [String!]
+}
+
+type ServicePackageFeeAdjustedByRegion {
+  id: Int!
+  adjustedPrice: Float!
+  regionId: Int!
+  region: Region!
+}
+
+type ServicePackage {
+  id: Int!
+  archivised: Boolean!
+  assignable: Boolean!
+  duration: Int!
+  durationUnit: DurationUnit!
+  mediaOnly: Boolean!
+  name: String!
+  note: String
+  orderNotifyEmails: [String!]!
+  owner: Affiliate!
+  ownerId: Int!
+  price: Float!
+  processor: Processor
+  processorId: Int
+  regionFeesAdjusted: [ServicePackageFeeAdjustedByRegion!]!
+  regionFeeAdjustedIds: [Int!]!
+  services: [Service!]!
+  serviceIds: [Int!]!
+  suspended: Boolean!
+  tourNotifyEmails: [String!]!
+  totalPrice: Float!
+  title: String
+}
+
+union ServiceMerged = Service | ServicePackage
+
+type ServiceCategoryState {
+  id: Int!
+  serviceType: ServiceType!
+  category: ServiceCategory
+  collapsed: Boolean!
+}
+
+input ServiceCategoryColorInput {
+  id: Int!
+  color: ColorInput!
+}
+
+input OrderedServiceUpdateInput {
+  message: String
+  processorId: Int
+}

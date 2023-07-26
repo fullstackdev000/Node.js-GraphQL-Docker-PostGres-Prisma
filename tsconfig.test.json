@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig",
+  "isolatedModules": true,
+  "compilerOptions": {
+    "removeComments": false,
+    "sourceMap": true
+  },
+  "target": "es2018"
+}

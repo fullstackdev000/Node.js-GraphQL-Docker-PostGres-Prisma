@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "removeComments": false,
+    "sourceMap": true
+  },
+  "include": [
+    "./src/lib/**/*",
+    "./src/server/**/*",
+    "./src/typings/**/*"
+  ],
+  "exclude": [
+    "./src/**/*.test.tsx"
+  ]
+}

@@ -1,0 +1,121 @@
+type File {
+  id: Int! @id
+  createdAt: DateTime! @createdAt
+  extension: String!
+  filename: String!
+  path: String!
+  size: Int!
+  updatedAt: DateTime! @updatedAt
+}
+
+type PhotoPreset {
+  id: Int! @id
+  enabledPresets: [EnabledPhotoPreset!]! @relation(name: "EnabledPhotoPresets" onDelete: CASCADE)
+  height: Int!
+  name: String!
+  owner: Affiliate! @relation(name: "PhotoPresetsCreatedByAffiliate")
+  resolution: Int!
+  width: Int!
+}
+
+type EnabledPhotoPreset {
+  id: Int! @id
+  enabled: Boolean!
+  photoPreset: PhotoPreset! @relation(name: "EnabledPhotoPresets")
+  downloadTrigger: PhotoDownloadTriggers! @default(value: NOTRIGGER)
+}
+
+type Video {
+  id: Int! @id
+  appearance: Appearance! @default(value: Always)
+  audio: String
+  category: VideoCategory! @default(value: Properties)
+  createdAt: DateTime! @createdAt
+  embeddedCode: String
+  file: File @relation(name: "HostedVideoFile", onDelete: CASCADE)
+  generateOption: GenerateOption
+  includeCaptions: Boolean! @default(value: false)
+  realEstate: RealEstate! @relation(name: "VideosRelatedToRealEstate")
+  overview: Boolean! @default(value: false)
+  photos: [FauxVideoPhotos!]! @relation(onDelete: CASCADE)
+  realEstateOrder: Int! @default(value: 0)
+  slideDuration: Int! @default(value: 0)
+  slideTransition: SlideTransition
+  status: VideoStatus! @default(value: INITIAL)
+  thumbId: Int
+  label: String
+  theaterMode: Boolean! @default(value: false)
+  type: VideoType!
+  updatedAt: DateTime! @updatedAt
+  url: String
+}
+
+type FauxVideoPhotos {
+  id: Int! @id
+  photo: Photo @relation(link: INLINE)
+  video: Video @relation(link: INLINE)
+  sortOrder: Int
+}
+
+type Photo {
+  id: Int! @id
+  createdAt: DateTime! @createdAt
+  fauxVideos: [FauxVideoPhotos!]! @relation(onDelete: CASCADE)
+  featured: Boolean! @default(value: false)
+  fileId: File! @relation(name: "PhotoFile", onDelete: CASCADE)
+  hidden: Boolean! @default(value: false)
+  realEstateId: RealEstate! @relation(name: "PhotosRelatedToRealEstate")
+  realEstateOrder: Int! @default(value: 0)
+  thumbId: File @relation(name: "PhotoThumb", onDelete: CASCADE)
+  title: String
+  webFileId: File @relation(name: "WebFile", onDelete: CASCADE)
+  updatedAt: DateTime! @updatedAt
+}
+
+type Panorama {
+  id: Int! @id
+  createdAt: DateTime! @createdAt
+  file: File! @relation(name: "PanoramaFile", onDelete: CASCADE)
+  hfov: Float! @default(value: 0)
+  initialHorizontalAngle: Float! @default(value: 0)
+  initialVerticalAngle: Float! @default(value: 0)
+  initialZoom: Float! @default(value: 0)
+  realEstate: RealEstate! @relation(name: "PanoramasRelatedToRealEstate")
+  realEstateOrder: Int! @default(value: 0)
+  thumb: File! @relation(name: "PanoramaThumb", onDelete: CASCADE)
+  theaterMode: Boolean! @default(value: false)
+  title: String
+  type: PanoramaType!
+  webFile: File! @relation(name: "PanoramaWebFile", onDelete: CASCADE)
+  updatedAt: DateTime! @updatedAt
+}
+
+type MediaDocument {
+  id: Int! @id
+  appearance: Appearance! @default(value: Branded)
+  createdAt: DateTime! @createdAt
+  fileId: File! @relation(name: "MediaDocumentFile")
+  label: String
+  realEstateId: RealEstate! @relation(name: "MediaDocumentsRelatedToRealEstate")
+  updatedAt: DateTime! @updatedAt
+}
+
+type MediaInteractive {
+  id: Int! @id
+  appearance: Appearance! @default(value: Branded)
+  embeddedCode: String
+  createdAt: DateTime! @createdAt
+  files: [MediaInteractiveFile!]! @relation(onDelete: CASCADE)
+  label: String
+  realEstate: RealEstate! @relation(name: "MediaInteractivesRelatedToRealEstate")
+  type: MediaInteractiveType!
+  updatedAt: DateTime! @updatedAt
+  url: String
+  theaterMode: Boolean @default(value: false)
+}
+
+type MediaInteractiveFile {
+  id: Int! @id
+  file: File!
+  label: String
+}

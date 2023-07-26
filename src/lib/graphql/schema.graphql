@@ -1,0 +1,479 @@
+# import * from "../../../build/gen/prisma/prisma.graphql"
+# import * from "./schemas/affiliate.graphql"
+# import * from "./schemas/agent.graphql"
+# import * from "./schemas/auth.graphql"
+# import * from "./schemas/brokerage.graphql"
+# import * from "./schemas/demo.graphql"
+# import * from "./schemas/domain.graphql"
+# import * from "./schemas/event.graphql"
+# import * from "./schemas/general.graphql"
+# import * from "./schemas/media.graphql"
+# import * from "./schemas/office.graphql"
+# import * from "./schemas/orders.graphql"
+# import * from "./schemas/panorama.graphql"
+# import * from "./schemas/payment.graphql"
+# import * from "./schemas/photographer.graphql"
+# import * from "./schemas/processor.graphql"
+# import * from "./schemas/realEstate.graphql"
+# import * from "./schemas/region.graphql"
+# import * from "./schemas/selfServiceAgent.graphql"
+# import * from "./schemas/service.graphql"
+# import * from "./schemas/tour.graphql"
+# import * from "./schemas/video.graphql"
+# import * from "./schemas/resetPassword.graphql"
+# import * from "./schemas/updatePassword.graphql"
+
+type Mutation {
+  acceptOrderedServices(where: WhereIdUniqueInput!, ids: [Int!]!): Order
+  activateOrder(where: WhereIdUniqueInput!): Order
+  addDemoImages(data: DemoImagesUpdateInput!, where: WhereIdUniqueInput!): DemoImages
+  addDomain(data: AddDomainInput!): Domain!
+  checkWhiteLabel(data: CheckWhiteLabelInput!): String!
+  createAffiliate(data: AffiliateCreateInput!): Affiliate!
+  createAgent(data: AgentCreateInput!): Agent!
+  createBrokerage(data: BrokerageCreateInput!): Brokerage!
+  createDemoThing(data: DemoThingCreateInput!): DemoThing!
+  createDomain(data: DomainCreateCustomInput!): Domain!
+  createEvent(data: EventCreateInput!): Event!
+  createMediaInteractive(data: MediaInteractiveCreateInput!): MediaInteractive!
+  createOffice(data: OfficeCreateInput!): Office!
+  createOrder(data: OrderCreateInput!): Order!
+  createPayment(data: PaymentCreateInput!): CreatePaymentData!
+  createPaymentSetupIntent: SetupIntent!
+  createPhotographer(data: PhotographerCreateInput!): Photographer!
+  createProcessor(data: ProcessorCreateInput!): Processor!
+  createSelfServiceAgent(data: SelfServiceCustomCreateInput!): SelfServiceAgent!
+  createService(data: ServiceCreateInput!): ServiceMerged!
+  createServiceBasic(data: ServiceBasicCreateInput!): Service!
+  createServicePackage(data: ServicePackageCreateInput!): ServicePackage!
+  createTourBanner(data: TourBannerCreateInput!): TourBanner!
+  createVideoEmbed(data: VideoEmbedCreateInput!): Video!
+  createVideoFaux(data: VideoFauxCreateInput!): Video!
+  createVideoHosted(data: VideoHostedCreateInput!): Video!
+  createVideoUrl(data: VideoUrlCreateInput!): Video!
+  coordinates(address: String!): GeoCoordinates
+  deleteAffiliate(where: WhereIdUniqueInput!): Affiliate!
+  deleteAgent(where: WhereIdUniqueInput!): Agent!
+  deleteBrokerage(where: WhereIdUniqueInput!): Brokerage!
+  deleteDomain(where: WhereIdUniqueInput!): Domain!
+  deleteEvent(where: WhereIdUniqueInput!): Event!
+  deleteMediaInteractive(where: WhereIdUniqueInput!): MediaInteractive!
+  deleteOffice(data: WhereIdUniqueInput!): Office
+  deleteOrder(where: WhereIdUniqueInput!): Order!
+  deletePhoto(where: WhereIdUniqueInput!): Photo!
+  deleteManyPhotos(ids: [Int!]!): Int!
+  deleteMediaDocument(where: WhereIdUniqueInput!): MediaDocument!
+  deletePanorama(where: WhereIdUniqueInput!): Panorama!
+  deleteManyPanoramas(ids: [Int!]!): Int!
+  deletePhotographer(where: WhereIdUniqueInput!): Photographer!
+  deleteProcessor(where: WhereIdUniqueInput!): Processor!
+  deleteService(where: WhereIdUniqueInput!): Service!
+  deleteVideo(where: WhereIdUniqueInput!): Video!
+  archiveService(where: WhereIdUniqueInput!): Service!
+  deleteServicePackage(where: WhereIdUniqueInput!): ServicePackage!
+  archiveServicePackage(where: WhereIdUniqueInput!): ServicePackage!
+  deleteTourBanner(where: WhereIdUniqueInput): TourBanner!
+  demoTriggerEvent(input: String!): String!
+  demoUpload(data: Upload!): String!
+  finalizeSplitPayment(data: FinalizeSplitPaymentInput!): CreatePaymentData!
+  logIn(data: LogInInput!): User!
+  logOut(noargs: Boolean!): Boolean
+  moveBrokerAgents(fromBrokerId: Int!, toBrokerId: Int!): [Agent!]!
+  publishOrder(where: WhereIdUniqueInput!): Order
+  purchaseDomain(data: AddDomainInput!): Domain!
+  createOnePageRealEstateFlyerPdf(data: OnePageRealEstateFlyerPdfInput!): String
+  reorderPanoramas(ids: [Int!]!): [Panorama!]!
+  reorderPhotos(ids: [Int!]!): [Photo!]!
+  reorderServices(ids: [Int!]!): [Service]!
+  reorderServicePackages(ids: [Int!]!): [Service]!
+  reorderVideos(ids: [Int!]!): [Video!]!
+  requestResetPassword(data: RequestResetPasswordInput!): RequestResetPasswordResponse!
+  resetPassword(data: ResetPasswordInput!): String!
+  toggleBrokerageActivityStatus(data: ToggleActivityStatusInput!, where: Int!): Brokerage!
+  updateAffiliate(data: AffiliateUpdateInput!, where: WhereIdUniqueInput!): Affiliate!
+  updateAgent(data: AgentUpdateInput!, where: WhereIdUniqueInput!): Agent!
+  updateBrokerage(data: BrokerageUpdateInput!, where: Int!): Brokerage!
+  updateDomain(data: DomainUpdateCustomInput!, where: WhereIdUniqueInput!): Domain!
+  updateEvent(data: EventUpdateInput!, where: WhereIdUniqueInput!): Event!
+  updateMediaInteractive(data: MediaInteractiveUpdateInput!, where: WhereIdUniqueInput!): MediaInteractive!
+  updateManyPanoramas(ids: [Int!]!, data: PanoramaCustomUpdateInput!): Int!
+  updateManyPhotos(ids: [Int!]!, data: PhotoCustomUpdateInput!): Int!
+  updateMediaDocument(data: MediaDocumentCustomUpdateInput!, where: WhereIdUniqueInput!): MediaDocument
+  updateOffice(data: OfficeUpdateInput!, where: WhereIdUniqueInput!): Office!
+  updateOrder(data: OrderUpdateInput!, where: WhereIdUniqueInput!): Order!
+  updateOrderedService(data: OrderedServiceUpdateInput!, where: WhereIdUniqueInput!): OrderedService!
+  updatePayment(id: Int!, input: PaymentUpdateInput!): Payment
+  updatePanorama(data: PanoramaCustomUpdateInput!, where: WhereIdUniqueInput!): Panorama!
+  updatePassword(data: UpdatePasswordInput!): String!
+  updatePhoto(data: PhotoCustomUpdateInput!, where: WhereIdUniqueInput!): Photo!
+  updateProcessor(data: ProcessorUpdateInput!, where: WhereIdUniqueInput!): Processor!
+  updatePhotographer(data: PhotographerUpdateInput!, where: WhereIdUniqueInput!): Photographer!
+  updateService(data: ServiceUpdateInput!, where: WhereIdUniqueInput!): ServiceMerged!
+  updateServiceBasic(data: ServiceBasicUpdateInput!, where: WhereIdUniqueInput!): Service!
+  updateServiceCategoryColor(data: [ServiceCategoryColorInput!]!): [ServiceCategory!]!
+  updateServiceCategoryCollapse(
+    serviceType: ServiceType!
+    serviceCategory: Int!
+    collapsed: Boolean
+  ): ServiceCategoryState!
+  updateServiceCategoryOrder(serviceType: ServiceType!, sortOrder: [Int!]!): [ServiceCategoryState!]!
+  updateServicePackage(data: ServicePackageUpdateInput!, where: WhereIdUniqueInput!): ServicePackage!
+  updateTourBanner(data: TourBannerUpdateInput!, where: WhereIdUniqueInput!): TourBanner!
+  updateVideoEmbed(data: VideoEmbedUpdateInput!, where: WhereIdUniqueInput!): Video!
+  updateVideoFaux(data: VideoFauxUpdateInput!, where: WhereIdUniqueInput!): Video!
+  updateVideoHosted(data: VideoHostedUpdateInput!, where: WhereIdUniqueInput!): Video!
+  updateVideoUrl(data: VideoUrlUpdateInput!, where: WhereIdUniqueInput!): Video!
+  uploadMediaDocument(data: MediaDocumentCustomCreateInput!): MediaDocument!
+  uploadRealEstatePanorama(data: PanoramaCustomCreateInput!): Panorama!
+  uploadRealEstatePhoto(data: PhotoCustomCreateInput!): Photo!
+  zipFiles(data: ZipFileCreateInput!): Zip!
+  zipPhotos(where: RealEstateWhereInput!): String!
+}
+
+type Query {
+  admin(where: WhereIdUniqueInput!): Admin!
+  admins(where: AdminWhereInput): [Admin!]!
+  affiliate(where: WhereIdUniqueInput!): Affiliate
+  affiliates(
+    where: AffiliateWhereInput
+    orderBy: AffiliateOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Affiliate]!
+  agent(where: WhereIdUniqueInput!): Agent!
+  agents(where: AgentWhereInput, search: String, searchByBrokerage: String): [Agent!]!
+  agentsConnection(
+    where: AgentWhereInput
+    orderBy: AgentOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+    search: String
+    searchByBrokerage: String
+  ): AgentConnection!
+  archivedServicePackages(
+    where: ServicePackageWhereInput
+    orderBy: ServiceOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [ServicePackage]!
+  archivedServices(
+    where: ServiceWhereInput
+    orderBy: ServiceOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Service]!
+  brokerage(where: WhereIdUniqueInput!): Brokerage!
+  brokerages(
+    where: BrokerageWhereInput
+    orderBy: BrokerageOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+    search: String
+  ): [Brokerage]!
+  brokeragesConnection(
+    where: BrokerageWhereInput
+    orderBy: BrokerageOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+    search: String
+  ): BrokerageConnection!
+  checkDomainExist(where: DomainInput!): ExternalDomainDetails
+  demoImages(where: WhereIdUniqueInput!): DemoImages
+  demoReportPDF: ReportPDF!
+  demoThings(
+    where: DemoThingWhereInput
+    orderBy: DemoThingOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [DemoThing]!
+  developer(where: WhereIdUniqueInput!): Developer!
+  developers(where: DeveloperWhereInput!): [Developer!]!
+  domain(where: DomainWhereUniqueInput!): Domain!
+  domains(
+    where: DomainWhereInput
+    orderBy: DomainOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Domain!]!
+  event(where: WhereIdUniqueInput!): Event!
+  events(
+    where: EventWhereInput
+    orderBy: EventOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Event!]!
+  getTopLevelDomainsPrice: [TopLevelDomain!]!
+  mediaInteractive(id: Int): MediaInteractive
+  mediaInteractives(
+    where: MediaInteractiveWhereInput
+    orderBy: MediaInteractiveOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [MediaInteractive]
+  me: Account!
+  mediaDocument(where: WhereIdUniqueInput!): MediaDocument!
+  mediaDocuments(where: MediaDocumentWhereInput): [MediaDocument!]!
+  office(where: WhereIdUniqueInput!): Office
+  offices(
+    where: OfficeWhereInput
+    orderBy: OfficeOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+    search: String
+  ): [Office]!
+  officesConnection(
+    where: OfficeWhereInput
+    orderBy: OfficeOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+    search: String
+  ): OfficeConnection!
+  order(where: WhereIdUniqueInput!): Order!
+  orderedServices(
+    where: OrderedServiceWhereInput
+    orderBy: OrderedServiceOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+    search: String
+  ): [OrderedService]!
+  orderedServicesConnection(
+    where: OrderedServiceWhereInput
+    orderBy: OrderedServiceOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+    search: String
+  ): OrderedServiceConnection!
+  orders(
+    where: OrderWhereInput
+    orderBy: OrderOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+    search: String
+  ): [Order]!
+  ordersConnection(
+    where: OrderWhereInput
+    orderBy: OrderOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+    search: String
+  ): OrderConnection!
+  orderWithFlatennedServices(where: WhereIdUniqueInput!): OrderWithFlatennedServices!
+  ordersWithFlatennedServices(
+    where: OrderWhereInput
+    orderBy: OrderOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+    search: String
+  ): [OrderWithFlatennedServices]!
+  ordersWithFlatennedServicesConnection(
+    where: OrderWhereInput
+    orderBy: OrderOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+    search: String
+  ): OrderWithFlatennedServicesConnection!
+  panorama(where: WhereIdUniqueInput!): Panorama!
+  panoramas(
+    where: PanoramaWhereInput
+    orderBy: PanoramaOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Panorama!]!
+  photo(where: WhereIdUniqueInput!): Photo
+  photographer(
+    where: WhereIdUniqueInput!
+    orderBy: PhotographerOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): Photographer!
+  photographers(
+    where: PhotographerWhereInput
+    orderBy: PhotographerOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+    search: String
+  ): [Photographer!]!
+  photographersConnection(
+    where: PhotographerWhereInput
+    orderBy: PhotographerOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+    search: String
+  ): PhotographerConnection!
+  photos(
+    where: PhotosCustomWhereInput
+    orderBy: PhotoOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Photo]!
+  processor(where: WhereIdUniqueInput!): Processor!
+  processors(where: ProcessorWhereInput, search: String): [Processor!]!
+  processorsConnection(
+    where: ProcessorWhereInput
+    orderBy: ProcessorOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+    search: String
+  ): ProcessorConnection!
+  realEstate(where: WhereIdUniqueInput!): RealEstate
+  realEstates(
+    where: RealEstateWhereInput
+    orderBy: RealEstateOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [RealEstate!]!
+  region(where: WhereIdUniqueInput!): Region
+  regions(
+    where: RegionWhereInput
+    orderBy: RegionOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Region]!
+  serviceBasic(where: ServiceWhereUniqueInput!): Service
+  serviceCategories(
+    where: ServiceCategoryWhereInput
+    orderBy: ServiceCategoryOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [ServiceCategory]!
+  servicePackage(where: ServicePackageWhereUniqueInput!): ServicePackage
+  servicePackages(
+    where: ServicePackageWhereInput
+    orderBy: ServiceOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [ServicePackage]!
+  services(where: ServiceWhereInput, orderBy: ServiceOrderByInput, search: String): [Service]!
+  servicesConnection(
+    where: ServiceWhereInput
+    orderBy: ServiceOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+    search: String
+  ): ServiceConnection!
+  servicesUIState(serviceType: ServiceType!): [ServiceCategoryState!]!
+  tour(where: WhereIdUniqueInput!): Tour
+  tourBanner(where: WhereIdUniqueInput!): TourBanner!
+  tourBanners(
+    where: TourBannerWhereInput
+    orderBy: TourBannerOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [TourBanner]!
+  tourGallery(where: WhereIdUniqueInput!, type: TourGalleryType, search: String): TourGallery
+  tourGalleryConnection(
+    where: WhereIdUniqueInput!
+    type: TourGalleryType
+    search: String
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): TourGalleryConnection!
+  video(where: WhereIdUniqueInput!): Video!
+  videos(
+    where: VideoWhereInput
+    orderBy: VideoOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Video]!
+}
+
+type Subscription {
+  demoEvent: String
+  uploadRealEstatePhotoProgress(where: PhotoProgressWhereInput!): PhotoProgress
+}

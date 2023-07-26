@@ -1,0 +1,8 @@
+input DemoImagesUpdateInput {
+  images: [Upload!]!
+  cropImages: [Upload!]!
+}
+
+type ReportPDF {
+  url: String!
+}

@@ -1,0 +1,56 @@
+type Panorama {
+  id: Int!
+  createdAt: DateTime!
+  date: String!
+  file: File!
+  fileName: String!
+  fullUrl: String!
+  hfov: Float!
+  initialHorizontalAngle: Float!
+  initialVerticalAngle: Float!
+  initialZoom: Float!
+  realEstate: RealEstate!
+  realEstateOrder: Int!
+  theaterMode: Boolean
+  thumb: File
+  thumbUrl: String!
+  title: String
+  type: PanoramaType!
+  webFile: File
+  webUrl: String!
+  updatedAt: DateTime!
+}
+
+input PanoramaCustomCreateInput {
+  file: Upload!
+  hfov: Float
+  initialHorizontalAngle: Float
+  initialVerticalAngle: Float
+  initialZoom: Float
+  photoIdentification: String!
+  realEstateId: Int!
+  theaterMode: Boolean
+  title: String
+  type: PanoramaType!
+}
+
+input PanoramaCustomUpdateInput {
+  hfov: Float
+  initialHorizontalAngle: Float
+  initialVerticalAngle: Float
+  initialZoom: Float
+  title: String
+  theaterMode: Boolean
+  type: PanoramaType
+}
+
+input PanoramaProgressWhereInput {
+  realEstateId: Int!
+}
+
+type PanoramaProgress {
+  complete: Boolean!
+  photoIdentification: String!
+  progress: Int!
+  realEstateId: Int!
+}

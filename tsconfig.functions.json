@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "removeComments": false,
+    "sourceMap": true
+  },
+  "include": [
+    "./src/lib/**/*",
+    "./src/functions/**/*",
+    "./src/typings/**/*"
+  ]
+}

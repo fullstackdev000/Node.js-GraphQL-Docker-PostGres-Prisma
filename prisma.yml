@@ -1,0 +1,24 @@
+custom:
+  datamodelsPath: src/lib/graphql/datamodels
+endpoint: http://${env:PRISMA_HOST}:4466/veewme/${env:PRISMA_STAGE}
+datamodel: # TODO make some types @embedded so they don't need id and separate table
+  - ${self:custom.datamodelsPath}/billing.prisma
+  - ${self:custom.datamodelsPath}/brokerage.prisma
+  - ${self:custom.datamodelsPath}/domains.prisma
+  - ${self:custom.datamodelsPath}/enums.prisma
+  - ${self:custom.datamodelsPath}/events.prisma
+  - ${self:custom.datamodelsPath}/general.prisma
+  - ${self:custom.datamodelsPath}/media.prisma
+  - ${self:custom.datamodelsPath}/orders.prisma
+  - ${self:custom.datamodelsPath}/payments.prisma
+  - ${self:custom.datamodelsPath}/services.prisma
+  - ${self:custom.datamodelsPath}/testsAndTmps.prisma
+  - ${self:custom.datamodelsPath}/tours.prisma
+  - ${self:custom.datamodelsPath}/users.prisma
+generate:
+  - generator: typescript-client
+    output: build/gen/prisma/
+  - generator: graphql-schema
+    output: build/gen/prisma/prisma.graphql
+seed:
+  run: ts-node src/lib/graphql/seed/index.ts

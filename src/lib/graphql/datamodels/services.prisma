@@ -1,0 +1,86 @@
+type PromoCode {
+  id: Int! @id
+  code: String!
+  serviceId: Service @relation(name: "PromoCodeForService" link: TABLE)
+  servicePackageId: ServicePackage @relation(name: "PromoCodeForServicePackage" link: TABLE)
+}
+
+type ServiceCategory {
+  id: Int! @id
+  color: Color! @relation(name: "ServiceCategoryColor")
+  label: String! @unique
+  icon: ServiceCategoryIcon!
+  orderIndex: Int
+  serviceUIState: [ServiceUIState!]! @relation(name: "ServiceCategoryState" onDelete: CASCADE)
+}
+
+type ServiceFeeAdjustedByRegion {
+  id: Int! @id
+  adjustedCompensation: Float
+  adjustedPrice: Float!
+  regionId: Region! @relation(name: "FeesForServicesRegion")
+  serviceId: Service @relation(name: "RegionsFeesAdjustedForService")
+  servicePackageId: ServicePackage @relation(name: "RegionsFeesAdjustedForServicePackage")
+}
+
+type Service {
+  id: Int! @id
+  archivised: Boolean! @default(value: false)
+  assignable: Boolean!
+  categoryId: ServiceCategory @relation(name: "ServiceCategory")
+  defaultCompensation: Float!
+  longDescription: Json
+  duration: Int!
+  durationUnit: DurationUnit!
+  link: String
+  mediaOnly: Boolean!
+  name: String!
+  note: String
+  orderedServiceIds: [OrderedService!]! @relation(name: "OrdersPlacedForTheService")
+  orderNotifyEmails: [String!]! @scalarList(strategy: RELATION)
+  ownerId: Affiliate! @relation(name: "ServicesCreatedByAffiliate")
+  packageIds: [ServicePackage]! @relation(name: "ServicesIncludedInPackages" onDelete: CASCADE)
+  price: Float!
+  processorId: Processor @relation(name: "ProcessorAssignedToService" link: TABLE)
+  promoCodeId: PromoCode @relation(name: "PromoCodeForService")
+  regionFeeAdjustedIds: [ServiceFeeAdjustedByRegion!]! @relation(name: "RegionsFeesAdjustedForService" onDelete: CASCADE)
+  serviceImageId: File @relation(name: "ServiceImage")
+  serviceType: ServiceType!
+  shortDescription: String!
+  sortOrder: Int! @default(value: 0)
+  suspended: Boolean! @default(value: false)
+  title: String
+  tourNotifyEmails: [String!]! @scalarList(strategy: RELATION)
+}
+
+type ServiceUIState {
+  id: Int! @id
+  affiliateId: Affiliate! @relation(name: "ServicesUIState")
+  serviceType: ServiceType!
+  categoryId: ServiceCategory! @relation(name: "ServiceCategoryState")
+  sortOrder: Int! @default(value: 0)
+  collapsed: Boolean! @default(value: false)
+}
+
+type ServicePackage {
+  id: Int! @id
+  archivised: Boolean! @default(value: false)
+  assignable: Boolean!
+  duration: Int!
+  durationUnit: DurationUnit!
+  mediaOnly: Boolean!
+  name: String!
+  note: String
+  orderNotifyEmails: [String!]! @scalarList(strategy: RELATION)
+  ownerId: Affiliate! @relation(name: "ServicePackagesCreatedByAffiliate")
+  price: Float!
+  processorId: Processor @relation(name: "ProcessorAssignedToServicePackage")
+  promoCodeId: PromoCode @relation(name: "PromoCodeForServicePackage")
+  regionFeeAdjustedIds: [ServiceFeeAdjustedByRegion!]! @relation(name: "RegionsFeesAdjustedForServicePackage" onDelete: CASCADE)
+  orderedServicesIds: [OrderedService!]! @relation(name: "ServiceOrderedAsPartOfTheServicePackage")
+  serviceIds: [Service!]! @relation(name: "ServicesIncludedInPackages")
+  sortOrder: Int! @default(value: 0)
+  suspended: Boolean! @default(value: false)
+  title: String
+  tourNotifyEmails: [String!]! @scalarList(strategy: RELATION)
+}

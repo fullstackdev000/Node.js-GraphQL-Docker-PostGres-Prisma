@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.web",
+  "compilerOptions": {
+    "removeComments": false,
+    "sourceMap": true
+  },
+  "exclude": [
+    "./src/**/*.test.tsx"
+  ]
+}

@@ -1,0 +1,17 @@
+type Billing {
+  id: Int! @id
+  automaticPaymentProcessing: PaymentProcessing @relation(name: "AutomaticPaymentProcessing")
+  creditCards: [CreditCard] @relation(name: "CreditCards")
+  frequency: BillingFrequency
+}
+
+type CreditCard {
+  id: Int! @id
+}
+
+type PaymentProcessing {
+  id: Int! @id
+  paymentProcessor: PaymentProcessor!
+  publicKey: String!
+  secretKey: String!
+}

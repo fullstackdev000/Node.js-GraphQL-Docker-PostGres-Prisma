@@ -1,0 +1,64 @@
+type Brokerage {
+  id: Int! @id
+  agents: [Agent!]! @relation(name: "AgentsAssignedToBrokerage")
+  brokerSubsidy: Boolean @default(value: false)
+  city: String!
+  companyName: String!
+  companyPay: Boolean @default(value: false)
+  country: Country!
+  coverPhoto: File @relation(name: "BrokerageCoverPhoto")
+  defaultColorScheme: Color! @relation(name: "BrokerageDefaultColorScheme" onDelete: CASCADE)
+  discount: String
+  displayAgentCompanyLogoOnTopOfEachTour: Boolean @default(value: false)
+  emailOffice: String
+  flyerDisclaimer: String
+  flyerLayout: FlyerLayoutName! @default(value: FEATURED1)
+  hideAnimateNavigationBar: Boolean @default(value: false)
+  hideFlyerFromRealEstateSiteTour: Boolean @default(value: false)
+  offices: [Office!]! @relation(name: "OfficesAssignedToBrokerage" onDelete: CASCADE)
+  owner: Affiliate! @relation(name: "BrokeragesCreatedByAffiliate")
+  phone: String!
+  photoDownloadPresets: [EnabledPhotoPreset!]! @relation(name: "EnabledPhotoPresetsCreatedByBrokerage" onDelete: CASCADE)
+  profilePicture: File @relation(name: "BrokerageProfilePicture")
+  realEstateSiteMediaStyle: RealEstateSiteMediaStyles! @default(value: MODERN)
+  region: Region! @relation(name: "BrokeragesAssignedToRegion")
+  removeExternalLinksFromUnbrandedTourFooter: Boolean @default(value: false)
+  removePhotographerBrandingFromBrandedTour: Boolean @default(value: false)
+  removePhotographerBrandingFromUnbrandedTour: Boolean @default(value: false)
+  removeRealEstateAddressFromUnbrandedTours: Boolean @default(value: false)
+  searchDocument: String
+  showPatternOverlayOnSlideShowAndVideoOverviewTour: Boolean @default(value: false)
+  showViewAdditionalPropertiesButtonOnTours: Boolean @default(value: false)
+  specialPricing: Boolean @default(value: false)
+  state: State!
+  status: ActivityStatus! @default(value: ACTIVE)
+  street: String!
+  templateId: Int
+  website: String
+  zip: String!
+  removeExternalLinksFromUnbrandedTour: Boolean @default(value: false)
+  removeOpenHouseBannerFromUnbrandedTour: Boolean @default(value: false)
+  removeSocialMediaSharingFromUnbrandedTour: Boolean @default(value: false)
+  showSearchBarOnGalleryHeader: Boolean @default(value: false)
+  allowAdminAccessToCompanyListings: Boolean @default(value: false)
+  allowAdminToPlaceOrdersOnBehalfAgent: Boolean @default(value: false)
+  showOfficesListing: Boolean @default(value: false)
+  showRealEstateMapOnShowcasePage: Boolean @default(value: false)
+  collectPayment: CollectPayment @default(value: ORDER)
+}
+
+type Office {
+  id: Int! @id
+  brokerage: Brokerage! @relation(name: "OfficesAssignedToBrokerage")
+  city: String!
+  country: Country!
+  email: String
+  owner: Affiliate! @relation(name: "OfficesCreatedByAffiliate")
+  photoDownloadPresets: [EnabledPhotoPreset!]! @relation(name: "EnabledPhotoPresetsCreatedByOffice" onDelete: CASCADE)
+  phone: String
+  region: Region! @relation(name: "OfficesAssignedToRegion")
+  state: State!
+  street: String!
+  website: String
+  zip: String!
+}
